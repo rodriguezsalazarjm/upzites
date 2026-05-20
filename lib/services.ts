@@ -152,7 +152,7 @@ export const SERVICES: Service[] = [
     tagline: "Pon tu negocio en el bolsillo de tus clientes.",
     card: "Aplicaciones móviles nativas y multiplataforma para empresas y emprendedores. Experiencias intuitivas, veloces y escalables para iOS y Android.",
     tags: ["iOS", "Android", "Multiplataforma"],
-    image: "/images/apps-moviles.jpg",
+    image: "/images/apps-cover.jpg",
     accent: "var(--upz-lime)",
     detail: {
       headline: "Desarrollo de apps móviles",
