@@ -26,7 +26,7 @@ export const SERVICES: Service[] = [
     tagline: "Identidad que vende, no solo que se ve bonita.",
     card: "Creamos identidades visuales memorables. Convertimos tu visión en un sistema visual coherente, profesional y poderoso.",
     tags: ["Identidad", "Sistema visual", "Manual"],
-    image: "/images/branding.jpg",
+    image: "/images/branding-cover.jpg",
     accent: "var(--upz-tomato)",
     detail: {
       headline: "Branding estratégico",

@@ -1730,3 +1730,242 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
   .svc-benefits { grid-template-columns: 1fr; }
   .svc-others { grid-template-columns: 1fr; }
 }
+
+/* ===================================================================
+   Branding service · bespoke landing
+   =================================================================== */
+
+/* Highlight + strike helpers */
+.mark {
+  background: var(--upz-lime);
+  color: var(--upz-carbon);
+  padding: 0 0.07em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.brand-punch .strike {
+  text-decoration: line-through;
+  text-decoration-thickness: 3px;
+  color: var(--fg-3);
+}
+
+/* 1. Hero */
+.brand-hero {
+  padding: 132px 0 72px;
+  background: var(--bg-1);
+  border-bottom: 1.5px solid var(--upz-carbon);
+}
+.brand-hero-grid {
+  display: grid; grid-template-columns: 1.02fr 0.98fr;
+  gap: 56px; align-items: center;
+}
+.brand-hero-title {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(38px, 4.8vw, 76px);
+  line-height: 0.96; letter-spacing: -0.02em;
+  text-transform: uppercase; margin: 14px 0 0;
+}
+.brand-hero-sub {
+  font-family: var(--font-text); font-size: 19px; line-height: 1.5;
+  color: var(--fg-2); max-width: 520px; margin: 22px 0 30px;
+}
+.brand-hero-media {
+  position: relative; aspect-ratio: 16 / 10; overflow: hidden;
+  border: 1.5px solid var(--upz-carbon); box-shadow: var(--sh-2);
+}
+.brand-hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* 2. Problema */
+.brand-problem { max-width: 900px; }
+.brand-lead {
+  font-family: var(--font-text); font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.45; color: var(--fg-2); margin: 0 0 32px; max-width: 760px;
+}
+.brand-punch {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(30px, 4vw, 60px);
+  line-height: 1.0; letter-spacing: -0.02em;
+  text-transform: uppercase; margin: 0;
+}
+
+/* 3. Promesa */
+.brand-promise {
+  display: grid; grid-template-columns: 0.92fr 1.08fr;
+  gap: 52px; align-items: center;
+}
+.brand-promise-media {
+  position: relative; aspect-ratio: 16 / 10; overflow: hidden;
+  border: 1.5px solid var(--upz-carbon); box-shadow: var(--sh-2);
+}
+.brand-promise-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.brand-promise-h {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(30px, 3.4vw, 54px);
+  line-height: 0.98; letter-spacing: -0.02em;
+  text-transform: uppercase; margin: 14px 0 18px;
+}
+.brand-body {
+  font-family: var(--font-text); font-size: 17px; line-height: 1.6;
+  color: var(--fg-2); margin: 0; max-width: 600px;
+}
+
+/* 4. Cards interactivas */
+.bcards {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-top: 40px; align-items: start;
+}
+.bcard {
+  width: 100%; text-align: left; font: inherit; color: var(--fg-1);
+  background: var(--bg-3); border: 1.5px solid var(--upz-carbon);
+  padding: 22px; cursor: pointer; position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform var(--dur-base) var(--ease-snap), box-shadow var(--dur-base);
+}
+.bcard::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--svc-accent, var(--upz-tomato));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-snap);
+}
+.bcard:hover, .bcard.is-open { transform: translateY(-3px); box-shadow: var(--sh-2); }
+.bcard:hover::before, .bcard.is-open::before { transform: scaleX(1); }
+.bcard-top { display: flex; align-items: center; justify-content: space-between; }
+.bcard-num {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+  letter-spacing: 0.08em; color: var(--svc-accent, var(--upz-tomato));
+}
+.bcard-toggle {
+  font-family: var(--font-display); font-size: 26px; line-height: 1;
+  color: var(--upz-carbon);
+  transition: transform var(--dur-base) var(--ease-snap);
+}
+.bcard.is-open .bcard-toggle { transform: rotate(45deg); }
+.bcard-title {
+  font-family: var(--font-text); font-weight: 800; font-size: 18px;
+  line-height: 1.15; letter-spacing: -0.01em; margin: 16px 0 8px;
+}
+.bcard-visible {
+  font-family: var(--font-text); font-size: 14px; line-height: 1.45;
+  color: var(--fg-3); margin: 0;
+}
+.bcard-detail {
+  display: grid; grid-template-rows: 0fr; opacity: 0;
+  transition: grid-template-rows var(--dur-slow) var(--ease-snap), opacity var(--dur-base), margin var(--dur-base);
+  margin-top: 0;
+}
+.bcard-detail > * { overflow: hidden; }
+.bcard:hover .bcard-detail, .bcard.is-open .bcard-detail {
+  grid-template-rows: 1fr; opacity: 1; margin-top: 14px;
+}
+.bcard-detail p {
+  font-family: var(--font-text); font-size: 14px; line-height: 1.55;
+  color: var(--fg-2); margin: 0 0 12px;
+}
+.bcard-micro {
+  display: inline-block; font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--svc-accent, var(--upz-tomato)); font-weight: 700;
+}
+
+/* 5. Proceso */
+.brand-process {
+  display: grid; grid-template-columns: 1.15fr 0.85fr;
+  gap: 52px; align-items: start; margin-top: 32px;
+}
+.brand-step {
+  display: flex; gap: 20px; padding: 26px 0;
+  border-bottom: 1px solid rgba(250, 251, 245, 0.16);
+}
+.brand-step:first-child { border-top: 1px solid rgba(250, 251, 245, 0.16); }
+.brand-step-num {
+  font-family: var(--font-display); font-weight: 900; font-size: 44px;
+  line-height: 0.9; color: var(--svc-accent, var(--upz-tomato)); flex: none;
+}
+.brand-step-body h3 {
+  font-family: var(--font-text); font-weight: 800; font-size: 20px;
+  color: var(--upz-off-white); margin: 0 0 6px;
+}
+.brand-step-body p {
+  font-family: var(--font-text); font-size: 15px; line-height: 1.55;
+  color: rgba(250, 251, 245, 0.72); margin: 0;
+}
+.brand-process-media {
+  position: relative; aspect-ratio: 1 / 1; overflow: hidden;
+  border: 1.5px solid var(--upz-off-white);
+}
+.brand-process-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* 6. Venta */
+.brand-sell {
+  text-align: center; max-width: 880px; margin-inline: auto;
+  display: flex; flex-direction: column; align-items: center;
+}
+.brand-sell .brand-body { margin: 24px auto 32px; }
+
+/* 7. Cierre */
+.brand-closing {
+  background: var(--upz-carbon); color: var(--upz-off-white);
+  padding: 120px 0;
+}
+.brand-closing .shell {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 26px;
+}
+.brand-closing-h {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(34px, 4.6vw, 76px);
+  line-height: 0.96; letter-spacing: -0.02em;
+  text-transform: uppercase; margin: 0; max-width: 920px;
+  color: var(--upz-off-white);
+}
+.brand-closing-copy {
+  font-family: var(--font-text); font-size: 18px; line-height: 1.55;
+  color: rgba(250, 251, 245, 0.74); max-width: 600px; margin: 0 0 6px;
+}
+
+@media (max-width: 860px) {
+  .brand-hero { padding: 104px 0 48px; }
+  .brand-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .brand-promise { grid-template-columns: 1fr; gap: 28px; }
+  .brand-promise-media { order: -1; }
+  .bcards { grid-template-columns: 1fr 1fr; }
+  .brand-process { grid-template-columns: 1fr; gap: 28px; }
+  .brand-process-media { order: -1; }
+  .brand-closing { padding: 88px 0; }
+}
+@media (max-width: 540px) {
+  .bcards { grid-template-columns: 1fr; }
+}
+
+/* ===================================================================
+   Preloader / splash screen
+   =================================================================== */
+.preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--upz-carbon);
+  display: flex; align-items: center; justify-content: center;
+  will-change: transform;
+  transform: translateY(0);
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.preloader.is-done {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+.preloader-inner {
+  display: flex; flex-direction: column; align-items: center; gap: 30px;
+  padding: 24px;
+}
+.preloader-logo {
+  width: clamp(220px, 38vw, 420px); height: auto; display: block;
+  filter: invert(1);
+}
+.preloader-bar {
+  width: clamp(160px, 30vw, 260px); height: 3px;
+  background: rgba(250, 251, 245, 0.18); overflow: hidden;
+}
+.preloader-bar span {
+  display: block; width: 100%; height: 100%;
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--upz-electric), var(--upz-lime));
+}
