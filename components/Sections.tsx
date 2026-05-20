@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Brand, Eyebrow, Reveal, Pill, Stamp, Sticker, Barcode } from "./Atoms";
+import { SERVICES } from "@/lib/services";
 
 // ---------- Top nav -------------------------------------------------
 export function TopNav() {
@@ -77,7 +78,7 @@ export function Hero() {
 
 // ---------- Top marquee --------------------------------------------
 export function Marquee({ items, variant }: { items?: string[], variant?: "carbon" }) {
-  const list = items || ["Branding estratégico", "Diseño web de alto rendimiento", "E-commerce", "UX/UI Design", "Marketing digital", "SEO · SEM · GEO", "Desarrollo de apps", "Edición de video"];
+  const list = items || ["Branding estratégico", "Diseño web de alto rendimiento", "E-commerce", "Marketing digital integral", "Apps móviles", "SEO integrado", "UX/UI Design", "Contenido & Ads"];
   const loop = [...list, ...list];
   return (
     <div className={`marquee${variant === "carbon" ? " marquee--carbon" : ""}`} data-screen-label="Marquee">
@@ -151,58 +152,8 @@ export function Intro() {
 }
 
 // ---------- 03 SERVICES --------------------------------------------
-const SERVICES = [
-  {
-    num: "01", total: "08",
-    title: "Branding estratégico",
-    body: "Construimos marcas sólidas con narrativa, sistema y dirección. Logotipo, paleta, tipografía y manual. Identidad que vende.",
-    tags: ["Logotipo", "Sistema visual", "Manual"],
-  },
-  {
-    num: "02", total: "08",
-    title: "Diseño web",
-    body: "Sitios modernos, rápidos y funcionales. Diseño de alto rendimiento, copy estratégico y CMS que tu equipo puede usar.",
-    tags: ["Marketing site", "Landing", "CMS"],
-  },
-  {
-    num: "03", total: "08",
-    title: "E-commerce",
-    body: "Tiendas online diseñadas para convertir tráfico en ventas reales. WooCommerce, Shopify, pasarelas y logística configurada.",
-    tags: ["Shopify", "WooCommerce", "Conversión"],
-  },
-  {
-    num: "04", total: "08",
-    title: "UX / UI design",
-    body: "Investigación, arquitectura, flujos e interfaz. Productos digitales claros, premium y orientados a métricas reales.",
-    tags: ["Research", "Flujos", "Interfaz"],
-  },
-  {
-    num: "05", total: "08",
-    title: "Marketing digital",
-    body: "Estrategia de contenido, social ads y embudos. Convertimos seguidores en clientes con criterio editorial y data.",
-    tags: ["Ads", "Contenido", "Funnels"],
-  },
-  {
-    num: "06", total: "08",
-    title: "SEO · SEM · GEO",
-    body: "Posicionamiento sostenible a largo plazo. Auditorías técnicas, contenido optimizado y campañas en buscadores con ROI.",
-    tags: ["SEO", "Google Ads", "GEO"],
-  },
-  {
-    num: "07", total: "08",
-    title: "Desarrollo de apps",
-    body: "Aplicaciones móviles y plataformas a medida. iOS, Android y web. Producto, diseño e ingeniería en un solo equipo.",
-    tags: ["iOS", "Android", "Web app"],
-  },
-  {
-    num: "08", total: "08",
-    title: "Edición de video",
-    body: "Contenido audiovisual con criterio de marca. Reels, anuncios, motion y vídeo corporativo listos para tus canales.",
-    tags: ["Reels", "Motion", "Anuncios"],
-  },
-];
-
 export function Services() {
+  const total = `0${SERVICES.length}`;
   return (
     <section id="services" className="section" data-screen-label="03 Services">
       <div className="shell">
@@ -216,7 +167,7 @@ export function Services() {
           </Reveal>
           <Reveal delay={120}>
             <p style={{ fontFamily: "var(--font-text)", fontSize: 16, lineHeight: 1.55, color: "var(--fg-2)", maxWidth: 460, margin: 0 }}>
-              Seis frentes estratégicos. Un solo sistema. Trabajamos como
+              Cinco frentes estratégicos. Un solo sistema. Trabajamos como
               un equipo interno embebido, no como una agencia que entrega
               archivos y desaparece.
             </p>
@@ -225,22 +176,29 @@ export function Services() {
 
         <div className="services-grid">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.num} delay={i * 60}>
-              <article className="service-card">
+            <Reveal key={s.slug} delay={i * 60}>
+              <Link
+                href={`/servicios/${s.slug}`}
+                className="service-card"
+                style={{ "--svc-accent": s.accent } as React.CSSProperties}
+              >
+                <div className="service-media">
+                  <img src={s.image} alt={s.title} loading="lazy" />
+                </div>
                 <div className="service-num">
-                  <span>{s.num} / {s.total}</span>
+                  <span>{s.num} / {total}</span>
                   <span>Servicio</span>
                 </div>
                 <h3 className="service-card-title">{s.title}</h3>
-                <p className="service-card-body">{s.body}</p>
+                <p className="service-card-body">{s.card}</p>
                 <div className="service-card-tags">
                   {s.tags.map((t) => <span key={t}>{t}</span>)}
                 </div>
                 <div className="service-card-foot">
-                  <span className="service-card-foot-label">Ver detalle</span>
+                  <span className="service-card-foot-label">Más detalles</span>
                   <span className="service-card-arr">↗</span>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>
@@ -684,11 +642,11 @@ export function Footer() {
 
           <div className="footer-col">
             <h4>Servicios</h4>
-            <a href="#services">Branding</a>
-            <a href="#services">UX / UI</a>
-            <a href="#services">Web</a>
-            <a href="#services">E-commerce</a>
-            <a href="#services">Dirección creativa</a>
+            <Link href="/servicios/branding">Branding</Link>
+            <Link href="/servicios/diseno-web">Diseño web</Link>
+            <Link href="/servicios/ecommerce">E-commerce</Link>
+            <Link href="/servicios/marketing-digital">Marketing digital</Link>
+            <Link href="/servicios/apps-moviles">Apps móviles</Link>
           </div>
 
           <div className="footer-col">

@@ -1,63 +1,13 @@
 import Link from "next/link";
 import { TopNav, Footer, Marquee, Testimonials } from "@/components/Sections";
 import { Eyebrow, Reveal, Pill, Sticker } from "@/components/Atoms";
+import { SERVICES } from "@/lib/services";
 
 export const metadata = {
   title: "Servicios — UPZITES",
   description:
-    "Servicios de diseño web que convierten y estrategias de marketing digital para empresas: branding, e-commerce, UX/UI, SEO, apps y video.",
+    "Servicios de diseño web que convierten y estrategias de marketing digital para empresas: branding, e-commerce, marketing integral y apps móviles.",
 };
-
-const SERVICES = [
-  {
-    num: "01",
-    title: "Branding estratégico",
-    body: "Creamos identidades visuales memorables. Convertimos tu visión en un sistema visual coherente, profesional y poderoso.",
-    tags: ["Identidad", "Sistema visual", "Manual"],
-  },
-  {
-    num: "02",
-    title: "Diseño web",
-    body: "Sitios web de alto rendimiento, rápidos y modernos. Plataformas optimizadas para la conversión de visitantes en clientes.",
-    tags: ["Alto rendimiento", "Conversión", "Responsive"],
-  },
-  {
-    num: "03",
-    title: "E-commerce",
-    body: "Tiendas online funcionales que venden. Maximizamos la experiencia de compra y las pasarelas de pago para incrementar tus ingresos.",
-    tags: ["Shopify", "WooCommerce", "Pasarelas"],
-  },
-  {
-    num: "04",
-    title: "UX / UI design",
-    body: "Interfaces intuitivas y centradas en el usuario. Diseñamos para garantizar una navegación lógica y aumentar la satisfacción del cliente.",
-    tags: ["Research", "Flujos", "Prototipo"],
-  },
-  {
-    num: "05",
-    title: "SEO",
-    body: "Optimización de motores de búsqueda para resultados a largo plazo. Te posicionamos en Google para atraer tráfico orgánico de calidad.",
-    tags: ["SEO técnico", "Contenido", "Orgánico"],
-  },
-  {
-    num: "06",
-    title: "Marketing digital",
-    body: "Campañas efectivas orientadas a resultados. Implementamos embudos de venta, Meta Ads y Google Ads para escalar tus ingresos.",
-    tags: ["Meta Ads", "Google Ads", "Funnels"],
-  },
-  {
-    num: "07",
-    title: "Desarrollo de apps",
-    body: "Creamos aplicaciones nativas y multiplataforma. Diseñamos experiencias de usuario robustas y escalables para iOS y Android.",
-    tags: ["iOS", "Android", "Multiplataforma"],
-  },
-  {
-    num: "08",
-    title: "Edición de video",
-    body: "Producción audiovisual de impacto. Edición dinámica, motion graphics y animaciones profesionales para tus redes y publicidad.",
-    tags: ["Motion", "Reels", "Anuncios"],
-  },
-];
 
 const FAQ = [
   {
@@ -75,6 +25,7 @@ const FAQ = [
 ];
 
 export default function ServiciosPage() {
+  const total = `0${SERVICES.length}`;
   return (
     <div id="top">
       <TopNav />
@@ -95,7 +46,7 @@ export default function ServiciosPage() {
                 En UPZITES no solo ejecutamos tareas; creamos un ecosistema
                 digital completo. Fusionamos creatividad de vanguardia,
                 tecnología robusta y estrategia orientada a resultados para que
-                cada servicio —desde el branding hasta el SEO— impulse el
+                cada servicio —desde el branding hasta el marketing— impulse el
                 crecimiento medible de tu negocio.
               </p>
               <div className="intro-tags" style={{ marginTop: 24 }}>
@@ -113,14 +64,21 @@ export default function ServiciosPage() {
         <div className="shell">
           <div className="services-grid">
             {SERVICES.map((s, i) => (
-              <Reveal key={s.num} delay={i * 60}>
-                <article className="service-card">
+              <Reveal key={s.slug} delay={i * 60}>
+                <Link
+                  href={`/servicios/${s.slug}`}
+                  className="service-card"
+                  style={{ "--svc-accent": s.accent } as React.CSSProperties}
+                >
+                  <div className="service-media">
+                    <img src={s.image} alt={s.title} loading="lazy" />
+                  </div>
                   <div className="service-num">
-                    <span>{s.num} / 08</span>
+                    <span>{s.num} / {total}</span>
                     <span>Servicio</span>
                   </div>
                   <h3 className="service-card-title">{s.title}</h3>
-                  <p className="service-card-body">{s.body}</p>
+                  <p className="service-card-body">{s.card}</p>
                   <div className="service-card-tags">
                     {s.tags.map((t) => <span key={t}>{t}</span>)}
                   </div>
@@ -128,7 +86,7 @@ export default function ServiciosPage() {
                     <span className="service-card-foot-label">Más detalles</span>
                     <span className="service-card-arr">↗</span>
                   </div>
-                </article>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -137,7 +95,7 @@ export default function ServiciosPage() {
 
       <Marquee
         variant="carbon"
-        items={["Branding", "Diseño web", "E-commerce", "UX/UI", "SEO · SEM", "Marketing digital", "Apps", "Video"]}
+        items={["Branding", "Diseño web", "E-commerce", "Marketing digital", "Apps móviles", "SEO integrado", "Contenido & Ads"]}
       />
 
       {/* Social proof */}
@@ -146,7 +104,7 @@ export default function ServiciosPage() {
       {/* FAQ */}
       <section id="faq" className="section section--ivory" data-screen-label="Servicios · FAQ">
         <div className="shell">
-          <Eyebrow num="07">FAQ · Las preguntas que más nos hacen</Eyebrow>
+          <Eyebrow num="06">FAQ · Las preguntas que más nos hacen</Eyebrow>
           <div className="services-head">
             <Reveal>
               <h2 className="services-h">
