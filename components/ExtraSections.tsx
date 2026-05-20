@@ -91,7 +91,7 @@ export function AuditTool() {
     <section className="audit-section" id="auditoria" data-screen-label="Audit">
       <div className="shell">
         <div className="audit-head">
-          <Eyebrow num="03">Auditoría web · Gratis · 60 segundos</Eyebrow>
+          <Eyebrow num="02">Auditoría web · Gratis · 60 segundos</Eyebrow>
           <div className="audit-head-grid">
             <Reveal>
               <h2 className="audit-h">

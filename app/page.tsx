@@ -1,6 +1,6 @@
-import { TopNav, Hero, Marquee, Intro, Services, Projects, Process, Stats, Testimonials, BigCTA, Footer } from "@/components/Sections";
+import { TopNav, Hero, Marquee, Services, Projects, Process, Stats, Testimonials, BigCTA, Footer } from "@/components/Sections";
 import { AuditTool, ScheduleMeeting } from "@/components/ExtraSections";
-import { TechMarquee } from "@/components/TechMarquee";
+import { QuienesSomos } from "@/components/QuienesSomos";
 
 export default function Home() {
   return (
@@ -10,24 +10,26 @@ export default function Home() {
       {/* Above-the-fold */}
       <Hero />
 
-      {/* Manifesto marquee (original text version) */}
-      <Marquee />
-
-      {/* Stats / trust bar + positioning intro */}
+      {/* Trust bar */}
       <Stats />
-      <Intro />
 
-      {/* Free site audit */}
-      <AuditTool />
+      {/* Manifesto marquee */}
+      <Marquee />
 
       {/* Services */}
       <Services />
 
-      {/* Schedule a meeting (3 steps + calendar widget placeholder) */}
-      <ScheduleMeeting />
+      {/* Free site audit */}
+      <AuditTool />
+
+      {/* About the studio + founder */}
+      <QuienesSomos />
 
       {/* Portfolio */}
       <Projects />
+
+      {/* Schedule a meeting */}
+      <ScheduleMeeting />
 
       {/* Detailed process */}
       <Process />

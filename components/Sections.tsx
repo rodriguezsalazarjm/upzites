@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Brand, Eyebrow, Reveal, Pill, Stamp, Sticker, Barcode } from "./Atoms";
 import { SERVICES } from "@/lib/services";
+import { HeroBackground } from "./HeroBackground";
+import { CountUp } from "./CountUp";
 
 // ---------- Top nav -------------------------------------------------
 export function TopNav() {
@@ -12,15 +14,16 @@ export function TopNav() {
       <div className="shell nav-inner">
         <Brand />
         <nav className="nav-links">
-          <Link href="/#auditoria">Auditoría</Link>
           <Link href="/servicios">Servicios</Link>
+          <Link href="/#auditoria">Auditoría</Link>
+          <Link href="/#nosotros">Nosotros</Link>
           <Link href="/#agenda">Agenda</Link>
           <Link href="/proyectos">Proyectos</Link>
           <Link href="/#process">Proceso</Link>
           <Link href="/#contact">Contacto</Link>
         </nav>
         <div className="nav-spacer"></div>
-        <span className="nav-meta">MIA · LA · CCS</span>
+        <span className="nav-meta">SANTIAGO · CHILE</span>
         <Link href="/#contact" className="btn btn-primary btn-sm">
           Hablemos <span className="arr">↗</span>
         </Link>
@@ -33,6 +36,7 @@ export function TopNav() {
 export function Hero() {
   return (
     <section className="hero grain" id="top" data-screen-label="01 Hero">
+      <HeroBackground />
       <div className="shell" style={{ position: "relative" }}>
         <div className="hero-runner">
           <span>UPZ · 0001 · TROPICAL UNDERGROUND<span className="dot"></span>SANTIAGO DE CHILE</span>
@@ -94,70 +98,13 @@ export function Marquee({ items, variant }: { items?: string[], variant?: "carbo
   );
 }
 
-// ---------- 02 INTRO / POSITIONING ---------------------------------
-export function Intro() {
-  return (
-    <section className="section section--tight" data-screen-label="02 Intro">
-      <div className="shell">
-        <Eyebrow num="02">Quiénes somos · Posicionamiento</Eyebrow>
-        <div className="intro-grid">
-          <Reveal>
-            <h2 className="intro-h">
-              Conectamos<br />
-              <span className="hl">con la marca</span><br />
-              a través de la<br />
-              <span className="em">creatividad</span>.
-            </h2>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <div className="intro-body">
-              <p>
-                UPZITES es un estudio creativo digital especializado en
-                <strong> branding, diseño web y desarrollo</strong>. Transformamos
-                ideas en marcas sólidas, sitios funcionales y contenido visual
-                con impacto real.
-              </p>
-              <p>
-                Trabajamos con emprendedores, empresas y creadores que buscan
-                una identidad profesional y una presencia digital moderna.
-                Estrategia, diseño y optimización SEO para que tu marca no
-                solo se vea bien, sino que también venda.
-              </p>
-              <div className="intro-tags">
-                <Pill dot>Estrategia 360°</Pill>
-                <Pill dot>Obsesión por el ROI</Pill>
-                <Pill dot>Alto rendimiento</Pill>
-                <Pill dot>SEO sostenible</Pill>
-                <Pill dot>Especialización profunda</Pill>
-                <Pill dot>Propiedad total</Pill>
-              </div>
-
-              <div className="intro-meta">
-                <div>
-                  <div className="intro-meta-num">+100</div>
-                  <div className="intro-meta-lbl">Clientes felices en LATAM</div>
-                </div>
-                <div>
-                  <div className="intro-meta-num">+50</div>
-                  <div className="intro-meta-lbl">Proyectos terminados</div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ---------- 03 SERVICES --------------------------------------------
 export function Services() {
   const total = `0${SERVICES.length}`;
   return (
     <section id="services" className="section" data-screen-label="03 Services">
       <div className="shell">
-        <Eyebrow num="03">Servicios · Lo que hacemos</Eyebrow>
+        <Eyebrow num="01">Servicios · Lo que hacemos</Eyebrow>
         <div className="services-head">
           <Reveal>
             <h2 className="services-h">
@@ -367,7 +314,7 @@ export function Process() {
   return (
     <section id="process" className="section section--carbon" data-screen-label="05 Process">
       <div className="shell">
-        <Eyebrow num="05">Proceso · Workflow estratégico</Eyebrow>
+        <Eyebrow num="06">Proceso · Workflow estratégico</Eyebrow>
         <div className="process-head">
           <Reveal>
             <h2 className="process-h">
@@ -409,7 +356,7 @@ export function Stats() {
   const stats = [
     { num: "+120", lbl: "Marcas posicionadas", sub: "Desde 2017" },
     { num: <>2.4<span className="em">×</span></>, lbl: "Conversión promedio", sub: "Post-rebrand" },
-    { num: "03", lbl: "Bases creativas", sub: "MIA · LA · CCS" },
+    { num: <CountUp to={150} prefix="+" />, lbl: "Webs creadas", sub: "En Chile" },
     { num: "48H", lbl: "Tiempo de respuesta", sub: "A cada brief" },
   ];
   return (
@@ -468,7 +415,7 @@ export function Testimonials() {
   return (
     <section id="testimonios" className="section section--ivory" data-screen-label="06 Testimonials">
       <div className="shell">
-        <Eyebrow num="06">Testimonios · Clientes</Eyebrow>
+        <Eyebrow num="07">Testimonios · Clientes</Eyebrow>
         <div className="testimonials-head">
           <Reveal>
             <h2 className="testimonials-h">
@@ -523,7 +470,7 @@ export function BigCTA() {
       <div className="shell">
         <div className="bigcta-stamp">↗</div>
         <div className="bigcta-eyebrow">
-          <span>09 · Hablemos</span>
+          <span>08 · Hablemos</span>
           <span className="rule"></span>
           <span>UPZ / {new Date().getFullYear()} · contacto@upzites.com</span>
         </div>
@@ -548,7 +495,7 @@ export function BigCTA() {
               </p>
               <div className="meta">
                 <div className="meta-row"><span className="b">●</span> contacto@upzites.com</div>
-                <div className="meta-row"><span className="b">●</span> Miami · Los Angeles · Caracas</div>
+                <div className="meta-row"><span className="b">●</span> Santiago de Chile</div>
                 <div className="meta-row"><span className="b">●</span> Lun–Vie · 09:00 – 18:00 GMT-4</div>
                 <div className="meta-row"><span className="b">●</span> Respuesta en 48h hábiles</div>
               </div>
@@ -685,7 +632,7 @@ export function Footer() {
 
         <div className="footer-foot">
           <span className="footer-cities">
-            <span className="b">●</span> Miami · Los Angeles · Venezuela
+            <span className="b">●</span> Santiago de Chile
           </span>
           <span className="footer-meta">UPZ · {new Date().getFullYear()} · 0001 · Diseño estratégico con carácter</span>
           <a href="#top" className="footer-toplink">Volver arriba <span className="arr">↗</span></a>
