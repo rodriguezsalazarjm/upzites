@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TopNav, Footer, Marquee } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker } from "@/components/Atoms";
 import { BrandingCards } from "@/components/BrandingCards";
+import { ServiceNav } from "@/components/ServiceNav";
 
 export const metadata = {
   title: "Branding estratégico — UPZITES",
@@ -23,6 +24,7 @@ export default function BrandingPage() {
   return (
     <div id="top" style={{ "--svc-accent": ACCENT } as CSSProperties}>
       <TopNav />
+      <ServiceNav current="branding" />
 
       {/* 1. Hero */}
       <section className="brand-hero" data-screen-label="Branding · Hero">
@@ -194,6 +196,7 @@ export default function BrandingPage() {
         </div>
       </section>
 
+      <ServiceNav current="branding" />
       <Footer />
     </div>
   );

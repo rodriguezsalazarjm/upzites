@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TopNav, Footer, Marquee } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker } from "@/components/Atoms";
 import { FeatureCards, type FeatureCard } from "@/components/FeatureCards";
+import { ServiceNav } from "@/components/ServiceNav";
 
 export const metadata = {
   title: "E-commerce — UPZITES",
@@ -53,6 +54,7 @@ export default function EcommercePage() {
   return (
     <div id="top" style={{ "--svc-accent": ACCENT } as CSSProperties}>
       <TopNav />
+      <ServiceNav current="ecommerce" />
 
       {/* 1. Hero */}
       <section className="brand-hero" data-screen-label="E-commerce · Hero">
@@ -258,6 +260,7 @@ export default function EcommercePage() {
         </div>
       </section>
 
+      <ServiceNav current="ecommerce" />
       <Footer />
     </div>
   );

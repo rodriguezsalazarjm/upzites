@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TopNav, Footer, Marquee } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker } from "@/components/Atoms";
 import { FeatureCards, type FeatureCard } from "@/components/FeatureCards";
+import { ServiceNav } from "@/components/ServiceNav";
 
 export const metadata = {
   title: "Diseño web — UPZITES",
@@ -36,6 +37,7 @@ export default function DisenoWebPage() {
   return (
     <div id="top" style={{ "--svc-accent": ACCENT } as CSSProperties}>
       <TopNav />
+      <ServiceNav current="diseno-web" />
 
       {/* 1. Hero */}
       <section className="brand-hero" data-screen-label="Web · Hero">
@@ -235,6 +237,7 @@ export default function DisenoWebPage() {
         </div>
       </section>
 
+      <ServiceNav current="diseno-web" />
       <Footer />
     </div>
   );

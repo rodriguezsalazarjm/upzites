@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { TopNav, Footer } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker } from "@/components/Atoms";
+import { ServiceNav } from "@/components/ServiceNav";
 import { SERVICES, getService } from "@/lib/services";
 
 export function generateStaticParams() {
@@ -26,11 +27,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const s = getService(slug);
   if (!s) notFound();
 
-  const others = SERVICES.filter((x) => x.slug !== s.slug);
-
   return (
     <div id="top">
       <TopNav />
+      <ServiceNav current={s.slug} />
 
       {/* Detail hero */}
       <section className="svc-hero" style={{ "--svc-accent": s.accent } as CSSProperties} data-screen-label="Servicio · Hero">
@@ -110,27 +110,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      {/* Otros servicios */}
-      <section className="section section--ivory" data-screen-label="Servicio · Otros">
-        <div className="shell">
-          <Eyebrow>Otros servicios</Eyebrow>
-          <div className="svc-others">
-            {others.map((o) => (
-              <Link
-                key={o.slug}
-                href={`/servicios/${o.slug}`}
-                className="svc-other"
-                style={{ "--svc-accent": o.accent } as CSSProperties}
-              >
-                <span className="svc-other-num">{o.num}</span>
-                <span className="svc-other-title">{o.title}</span>
-                <span className="svc-other-arr">↗</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <ServiceNav current={s.slug} />
       <Footer />
     </div>
   );

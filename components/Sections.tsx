@@ -14,7 +14,21 @@ export function TopNav() {
       <div className="shell nav-inner">
         <Brand />
         <nav className="nav-links">
-          <Link href="/servicios">Servicios</Link>
+          <div className="nav-dropdown">
+            <Link href="/servicios" className="nav-dropdown-trigger">
+              Servicios <span className="nav-caret" aria-hidden="true">▾</span>
+            </Link>
+            <div className="nav-menu" role="menu">
+              {SERVICES.map((s) => (
+                <Link key={s.slug} href={`/servicios/${s.slug}`} role="menuitem">
+                  {s.title}
+                </Link>
+              ))}
+              <Link href="/servicios" className="nav-menu-all" role="menuitem">
+                Ver todos <span className="arr">↗</span>
+              </Link>
+            </div>
+          </div>
           <Link href="/#auditoria">Auditoría</Link>
           <Link href="/#nosotros">Nosotros</Link>
           <Link href="/#agenda">Agenda</Link>

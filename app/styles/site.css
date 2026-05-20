@@ -2086,3 +2086,74 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
 .nav-brand--lg .nav-brand-img { height: 48px; }
 .footer-bigword--logo { display: block; }
 .footer-bigword--logo img { width: 100%; height: auto; display: block; }
+
+/* ===================================================================
+   Header services dropdown
+   =================================================================== */
+.nav-dropdown { position: relative; }
+.nav-dropdown-trigger { display: inline-flex; align-items: center; gap: 5px; }
+.nav-caret { font-size: 10px; transition: transform var(--dur-fast) var(--ease-snap); }
+.nav-dropdown:hover .nav-caret,
+.nav-dropdown:focus-within .nav-caret { transform: rotate(180deg); }
+.nav-menu {
+  position: absolute; top: 100%; left: -12px;
+  min-width: 230px; padding: 8px;
+  background: var(--upz-off-white);
+  border: 1.5px solid var(--upz-carbon);
+  box-shadow: var(--sh-2);
+  display: flex; flex-direction: column;
+  opacity: 0; visibility: hidden; transform: translateY(6px);
+  transition: opacity var(--dur-fast) var(--ease-snap), transform var(--dur-fast) var(--ease-snap), visibility var(--dur-fast);
+  z-index: 60;
+}
+.nav-menu::before { content: ""; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+.nav-dropdown:hover .nav-menu,
+.nav-dropdown:focus-within .nav-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-menu a {
+  padding: 9px 12px !important; font-weight: 600 !important;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.nav-menu a:hover { background: var(--upz-carbon); color: var(--upz-off-white) !important; }
+.nav-menu-all {
+  border-top: 1px solid var(--upz-line); margin-top: 4px;
+  color: var(--upz-electric) !important;
+}
+.nav-menu-all .arr { font-weight: 900; }
+
+/* ===================================================================
+   Service switcher pills (top + bottom of each service page)
+   =================================================================== */
+.service-nav { background: var(--bg-1); border-bottom: 1.5px solid var(--upz-line); }
+.service-nav + .svc-hero, .service-nav + .brand-hero { border-top: none; }
+.service-nav-inner { display: flex; align-items: center; gap: 18px; padding: 14px 0; }
+.service-nav-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--fg-3); flex: none;
+}
+.service-nav-pills {
+  display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.service-nav-pills::-webkit-scrollbar { display: none; }
+.svcnav-pill {
+  flex: none; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-text); font-weight: 600; font-size: 13px;
+  padding: 8px 16px; border-radius: 999px;
+  border: 1.5px solid var(--upz-line); background: var(--upz-paper);
+  color: var(--fg-2); text-decoration: none;
+  transition: border-color var(--dur-fast), color var(--dur-fast), background var(--dur-fast);
+}
+.svcnav-pill:hover { border-color: var(--upz-carbon); color: var(--fg-1); }
+.svcnav-pill.is-active {
+  background: var(--upz-carbon); border-color: var(--upz-carbon);
+  color: var(--upz-off-white);
+}
+.svcnav-pill.is-active::before {
+  content: ""; width: 7px; height: 7px; border-radius: 999px;
+  background: var(--svc-accent, var(--upz-lime));
+}
+
+@media (max-width: 700px) {
+  .service-nav-label { display: none; }
+}
