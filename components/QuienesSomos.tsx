@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { Eyebrow, Reveal, Pill } from "./Atoms";
-import { FounderCarousel } from "./FounderCarousel";
+import { Eyebrow, Reveal } from "./Atoms";
 
 const TRUST = [
   "Estrategia 360°",
@@ -11,49 +10,66 @@ const TRUST = [
   "Respuesta en 24h",
 ];
 
+const BLOCKS = [
+  {
+    kicker: "El estudio",
+    name: "Quién es UPZITES",
+    role: "",
+    img: "/images/nosotros/santiago.jpg",
+    text: "Estudio de diseño fundado en Santiago de Chile, especializado en estrategia digital, branding y UX/UI. No diseñamos para decorar: diseñamos para posicionar. Mezclamos estrategia, diseño bold y cultura visual tropical underground —con raíces caraqueñas y la mira en LATAM, EE.UU. y Europa.",
+  },
+  {
+    kicker: "Founder",
+    name: "José Rodríguez",
+    role: "Diseño & Desarrollo Web",
+    img: "/images/founder-1.jpg",
+    text: "Diseñador y desarrollador de UPZITES. Une diseño gráfico, desarrollo web y pensamiento técnico —con base en ingeniería civil— para crear marcas, interfaces y sitios con estructura, rendimiento y carácter.",
+  },
+  {
+    kicker: "Equipo",
+    name: "Jilly Moreno",
+    role: "Administración & Social Media",
+    img: "/images/jilly-1.jpg",
+    text: "Licenciada en Administración con +7 años en gestión, RR.HH. y operaciones. Mantiene el ritmo de UPZITES: organiza procesos, cuida los detalles y conecta la marca con los trends de Instagram y TikTok.",
+  },
+];
+
 export function QuienesSomos() {
   return (
     <section id="nosotros" className="section qs" data-screen-label="03 Quiénes somos">
       <div className="shell">
         <Eyebrow num="03">Quiénes somos · El estudio</Eyebrow>
-        <div className="qs-founder">
+        <div className="services-head">
           <Reveal>
-            <FounderCarousel />
+            <h2 className="services-h">
+              No hacemos marcas bonitas.<br />
+              <span className="b">Marcas con dirección<span style={{ color: "var(--upz-tomato)" }}>.</span></span>
+            </h2>
           </Reveal>
           <Reveal delay={120}>
-            <div className="qs-bio">
-              <h2 className="services-h" style={{ fontSize: "clamp(28px, 3.4vw, 52px)", margin: "0 0 18px" }}>
-                No hacemos marcas bonitas.<br />
-                <span className="b">Marcas con dirección<span style={{ color: "var(--upz-tomato)" }}>.</span></span>
-              </h2>
-              <p style={{ fontFamily: "var(--font-text)", fontSize: 17, lineHeight: 1.6, color: "var(--fg-2)", margin: 0 }}>
-                UPZITES es un <strong>estudio de diseño fundado en Santiago de Chile</strong>,
-                especializado en estrategia digital, branding y UX/UI. Ayudamos a marcas,
-                emprendedores y empresas a verse más fuertes, claras y competitivas:
-                unimos estrategia, diseño bold y una cultura visual tropical underground
-                para construir identidades y webs con carácter. Con raíces caraqueñas y la
-                mira en Latinoamérica, Estados Unidos y Europa.
-              </p>
-              <div className="intro-tags" style={{ marginTop: 20 }}>
-                <Pill dot>Estrategia</Pill>
-                <Pill dot>Sistema</Pill>
-                <Pill dot>Carácter</Pill>
-              </div>
-              <div className="qs-team">
-                <div className="qs-team-member">
-                  <img src="/images/founder-1.jpg" alt="José Rodríguez" loading="lazy" />
-                  <div><strong>José Rodríguez</strong><span>Diseño &amp; Desarrollo · Founder</span></div>
-                </div>
-                <div className="qs-team-member">
-                  <img src="/images/jilly-1.jpg" alt="Jilly Moreno" loading="lazy" />
-                  <div><strong>Jilly Moreno</strong><span>Administración &amp; Social Media</span></div>
-                </div>
-              </div>
-              <div className="hero-actions" style={{ marginTop: 22 }}>
-                <Link href="/nosotros" className="btn btn-dark btn-lg">Saber más <span className="arr">↗</span></Link>
-              </div>
-            </div>
+            <p style={{ fontFamily: "var(--font-text)", fontSize: 16, lineHeight: 1.55, color: "var(--fg-2)", maxWidth: 460, margin: 0 }}>
+              Un estudio pequeño y una presencia grande: estrategia, diseño y
+              desarrollo en un solo equipo.
+            </p>
           </Reveal>
+        </div>
+
+        <div className="qs-cards">
+          {BLOCKS.map((b, i) => (
+            <Reveal key={b.name} delay={i * 80}>
+              <article className="qs-card">
+                <div className="qs-card-img">
+                  <img src={b.img} alt={b.name} loading="lazy" />
+                </div>
+                <div className="qs-card-body">
+                  <span className="qs-card-kicker">{b.kicker}</span>
+                  <h3>{b.name}</h3>
+                  {b.role && <p className="qs-card-role">{b.role}</p>}
+                  <p>{b.text}</p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
         </div>
 
         <Reveal delay={80}>
@@ -61,6 +77,12 @@ export function QuienesSomos() {
             {TRUST.map((t) => (
               <span className="qs-trust-item" key={t}><span className="qs-trust-dot">●</span>{t}</span>
             ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={120}>
+          <div className="hero-actions" style={{ justifyContent: "center", marginTop: 28 }}>
+            <Link href="/nosotros" className="btn btn-dark btn-lg">Saber más sobre nosotros <span className="arr">↗</span></Link>
           </div>
         </Reveal>
       </div>
