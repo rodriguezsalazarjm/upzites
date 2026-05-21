@@ -7,6 +7,7 @@ import { SERVICES } from "@/lib/services";
 import { HeroBackground } from "./HeroBackground";
 import { CountUp } from "./CountUp";
 import { ProjectsAccordion } from "./ProjectsAccordion";
+import { SocialLinks, UPZITES_SOCIALS } from "./SocialIcons";
 
 // ---------- Top nav -------------------------------------------------
 export function TopNav() {
@@ -39,6 +40,7 @@ export function TopNav() {
         </nav>
         <div className="nav-spacer"></div>
         <span className="nav-meta">SANTIAGO · CHILE</span>
+        <SocialLinks links={UPZITES_SOCIALS} className="nav-socials" />
         <Link href="/#contact" className="btn btn-primary btn-sm">
           Hablemos <span className="arr">↗</span>
         </Link>
@@ -513,11 +515,8 @@ export function Footer() {
 
           <div className="footer-col">
             <h4>Síguenos</h4>
-            <a href="#">Instagram ↗</a>
-            <a href="#">Behance ↗</a>
-            <a href="#">LinkedIn ↗</a>
-            <a href="#">Are.na ↗</a>
-            <a href="mailto:contacto@upzites.com">contacto@upzites.com</a>
+            <SocialLinks links={UPZITES_SOCIALS} className="footer-socials" />
+            <a href="mailto:contacto@upzites.com" style={{ marginTop: 14 }}>contacto@upzites.com</a>
           </div>
 
           <div className="footer-col">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TopNav, Footer } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker, Pill } from "@/components/Atoms";
 import { FeatureCards, type FeatureCard } from "@/components/FeatureCards";
+import { SocialLinks, JOSE_SOCIALS, JILLY_SOCIALS } from "@/components/SocialIcons";
 
 export const metadata = {
   title: "Quiénes somos — UPZITES",
@@ -60,6 +61,7 @@ const JILLY_PHOTOS = [
   "/images/jilly-1.jpg",
   "/images/jilly-2.jpg",
   "/images/jilly-3.jpg",
+  "/images/jilly-4.jpg",
 ];
 
 export default function NosotrosPage() {
@@ -318,6 +320,7 @@ export default function NosotrosPage() {
                   <Pill dot>Visión técnica</Pill>
                   <Pill dot>Visión de negocio</Pill>
                 </div>
+                <SocialLinks links={JOSE_SOCIALS} className="team-socials" />
               </div>
             </Reveal>
           </div>
@@ -353,6 +356,7 @@ export default function NosotrosPage() {
                   <Pill dot>Social media</Pill>
                   <Pill dot>Organización</Pill>
                 </div>
+                <SocialLinks links={JILLY_SOCIALS} className="team-socials" />
               </div>
             </Reveal>
           </div>

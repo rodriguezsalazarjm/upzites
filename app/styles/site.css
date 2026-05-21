@@ -2470,3 +2470,31 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
 .qs-team-member img { width: 46px; height: 46px; border-radius: 999px; object-fit: cover; border: 1.5px solid var(--upz-carbon); }
 .qs-team-member strong { display: block; font-family: var(--font-text); font-weight: 800; font-size: 14px; color: var(--upz-carbon); }
 .qs-team-member span { display: block; font-family: var(--font-text); font-size: 12px; color: var(--fg-3); }
+
+/* ===================================================================
+   Social icons + wider header
+   =================================================================== */
+.socials { display: inline-flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.social-icon {
+  width: 36px; height: 36px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1.5px solid var(--upz-carbon); color: var(--upz-carbon);
+  background: transparent; text-decoration: none;
+  transition: background var(--dur-fast) var(--ease-snap), color var(--dur-fast), transform var(--dur-fast);
+}
+.social-icon svg { width: 17px; height: 17px; }
+.social-icon:hover { background: var(--upz-carbon); color: var(--upz-off-white); transform: translateY(-2px); }
+
+/* Wider header */
+.nav-bar .nav-inner { max-width: 1500px; height: 84px; }
+.nav-socials { gap: 8px; }
+.nav-socials .social-icon { width: 34px; height: 34px; }
+.nav-socials .social-icon svg { width: 16px; height: 16px; }
+
+.footer-socials { margin-top: 2px; }
+.team-socials { margin-top: 16px; }
+.qs-card-socials { margin-top: 14px; }
+
+@media (max-width: 820px) {
+  .nav-socials, .nav-meta { display: none; }
+}

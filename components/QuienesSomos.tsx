@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Eyebrow, Reveal } from "./Atoms";
+import { SocialLinks, UPZITES_SOCIALS, JOSE_SOCIALS, JILLY_SOCIALS } from "./SocialIcons";
 
 const TRUST = [
   "Estrategia 360°",
@@ -17,6 +18,7 @@ const BLOCKS = [
     role: "",
     img: "/images/nosotros/santiago.jpg",
     text: "Estudio de diseño fundado en Santiago de Chile, especializado en estrategia digital, branding y UX/UI. No diseñamos para decorar: diseñamos para posicionar. Mezclamos estrategia, diseño bold y cultura visual tropical underground —con raíces caraqueñas y la mira en LATAM, EE.UU. y Europa.",
+    socials: UPZITES_SOCIALS,
   },
   {
     kicker: "Founder",
@@ -24,6 +26,7 @@ const BLOCKS = [
     role: "Diseño & Desarrollo Web",
     img: "/images/founder-1.jpg",
     text: "Diseñador y desarrollador de UPZITES. Une diseño gráfico, desarrollo web y pensamiento técnico —con base en ingeniería civil— para crear marcas, interfaces y sitios con estructura, rendimiento y carácter.",
+    socials: JOSE_SOCIALS,
   },
   {
     kicker: "Equipo",
@@ -31,6 +34,7 @@ const BLOCKS = [
     role: "Administración & Social Media",
     img: "/images/jilly-1.jpg",
     text: "Licenciada en Administración con +7 años en gestión, RR.HH. y operaciones. Mantiene el ritmo de UPZITES: organiza procesos, cuida los detalles y conecta la marca con los trends de Instagram y TikTok.",
+    socials: JILLY_SOCIALS,
   },
 ];
 
@@ -66,6 +70,7 @@ export function QuienesSomos() {
                   <h3>{b.name}</h3>
                   {b.role && <p className="qs-card-role">{b.role}</p>}
                   <p>{b.text}</p>
+                  <SocialLinks links={b.socials} className="qs-card-socials" />
                 </div>
               </article>
             </Reveal>
