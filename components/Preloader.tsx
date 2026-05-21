@@ -26,10 +26,9 @@ export function Preloader() {
   return (
     <div className={`preloader${loading ? "" : " is-done"}`} aria-hidden={!loading}>
       {mounted && (
-        <div className="preloader-zoom" aria-label="UPZITES">
-          <img src="/images/isotipo-white.png" alt="UPZITES" className="preloader-iso preloader-iso--1" />
-          <img src="/images/isotipo-white.png" alt="" aria-hidden="true" className="preloader-iso preloader-iso--2" />
-          <img src="/images/isotipo-white.png" alt="" aria-hidden="true" className="preloader-iso preloader-iso--3" />
+        <div className="preloader-stage">
+          <img src="/images/upzites-white.png" alt="UPZITES" className="preloader-logo" />
+          <div className="preloader-bar"><span /></div>
         </div>
       )}
     </div>

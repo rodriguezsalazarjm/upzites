@@ -1966,34 +1966,42 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
   position: fixed; inset: 0; z-index: 9999;
   background: var(--upz-carbon);
   display: flex; align-items: center; justify-content: center;
-  will-change: transform;
-  transform: translateY(0);
-  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  overflow: hidden; will-change: transform, opacity;
+  transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.7s ease;
 }
 .preloader.is-done {
-  transform: translateY(-100%);
+  transform: scale(1.6);
+  opacity: 0;
   pointer-events: none;
 }
-.preloader-zoom { position: relative; width: 1px; height: 1px; }
-.preloader-iso {
-  position: absolute; left: 50%; top: 50%;
-  width: clamp(90px, 16vw, 170px); height: auto;
-  transform: translate(-50%, -50%) scale(0.25);
-  opacity: 0;
-  animation: isoZoom 1.9s ease-in infinite;
-  will-change: transform, opacity;
+.preloader-stage { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.preloader-logo {
+  width: clamp(200px, 42vw, 440px); height: auto; display: block;
+  animation: logoFocus 1.15s var(--ease-snap) both;
+  will-change: transform, opacity, filter;
 }
-.preloader-iso--2 { animation-delay: 0.63s; }
-.preloader-iso--3 { animation-delay: 1.26s; }
-@keyframes isoZoom {
-  0% { transform: translate(-50%, -50%) scale(0.22); opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 0.6; }
-  100% { transform: translate(-50%, -50%) scale(3.4); opacity: 0; }
+@keyframes logoFocus {
+  0%   { opacity: 0; transform: scale(1.7); filter: blur(16px); }
+  55%  { opacity: 1; }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
 }
+.preloader-bar {
+  width: clamp(150px, 32vw, 260px); height: 2px;
+  background: rgba(250, 251, 245, 0.16); overflow: hidden;
+  opacity: 0; animation: barIn 0.4s 0.5s var(--ease-snap) forwards;
+}
+@keyframes barIn { to { opacity: 1; } }
+.preloader-bar span {
+  display: block; height: 100%; width: 100%; transform-origin: left; transform: scaleX(0);
+  background: linear-gradient(90deg, var(--upz-electric), var(--upz-lime));
+  animation: barFill 1.9s 0.5s ease-out forwards;
+}
+@keyframes barFill { to { transform: scaleX(1); } }
 @media (prefers-reduced-motion: reduce) {
-  .preloader-iso { animation: none; transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  .preloader-iso--2, .preloader-iso--3 { display: none; }
+  .preloader-logo { animation: none; }
+  .preloader-bar span { animation: none; transform: scaleX(1); }
+  .preloader-bar { opacity: 1; animation: none; }
+  .preloader.is-done { transform: none; }
 }
 
 /* ===================================================================
