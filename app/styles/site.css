@@ -2365,3 +2365,62 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
   .nos-founder { grid-template-columns: 1fr; gap: 28px; }
   .nos-founder-photos { max-width: 420px; }
 }
+
+/* ===================================================================
+   Liquid glass · floating actions · cookies · scroll progress · trust bar
+   =================================================================== */
+.glass {
+  background: rgba(250, 251, 245, 0.55);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 9000;
+  background: linear-gradient(90deg, var(--upz-electric), var(--upz-lime));
+  transform-origin: left; transform: scaleX(0); will-change: transform;
+}
+
+.fab { position: fixed; right: 18px; bottom: 18px; z-index: 8000; display: flex; flex-direction: column; gap: 12px; }
+.fab-btn {
+  width: 54px; height: 54px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; border: none; text-decoration: none; position: relative;
+  box-shadow: 0 10px 24px -8px rgba(17, 17, 17, 0.5);
+  transition: transform var(--dur-fast) var(--ease-snap), box-shadow var(--dur-base);
+}
+.fab-btn:hover { transform: translateY(-3px) scale(1.05); }
+.fab-wa { background: #25d366; }
+.fab-mail { background: var(--upz-carbon); }
+.fab-label {
+  position: absolute; right: 64px; top: 50%; transform: translateY(-50%) translateX(6px);
+  white-space: nowrap; font-family: var(--font-text); font-weight: 700; font-size: 12px;
+  color: var(--upz-carbon); background: var(--upz-off-white);
+  border: 1.5px solid var(--upz-carbon); padding: 6px 10px; border-radius: 999px;
+  opacity: 0; pointer-events: none; transition: opacity var(--dur-fast), transform var(--dur-fast);
+}
+.fab-btn:hover .fab-label { opacity: 1; transform: translateY(-50%) translateX(0); }
+
+.cookie {
+  position: fixed; left: 18px; bottom: 18px; z-index: 8500;
+  max-width: 420px; padding: 18px 20px; border-radius: 14px;
+  display: flex; flex-direction: column; gap: 14px; box-shadow: var(--sh-3);
+}
+.cookie-text { display: flex; flex-direction: column; gap: 4px; }
+.cookie-text strong { font-family: var(--font-text); font-weight: 800; font-size: 15px; color: var(--upz-carbon); }
+.cookie-text span { font-family: var(--font-text); font-size: 13px; line-height: 1.5; color: var(--fg-2); }
+.cookie-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+.qs-trust {
+  display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center;
+  margin-top: 44px; padding: 18px 24px; border-radius: 14px; border: 1px solid var(--upz-line);
+}
+.qs-trust-item { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-text); font-weight: 700; font-size: 13px; color: var(--upz-carbon); }
+.qs-trust-dot { color: var(--upz-electric); font-size: 9px; }
+
+@media (max-width: 540px) {
+  .fab-btn { width: 48px; height: 48px; }
+  .fab { bottom: 96px; }
+  .cookie { left: 12px; right: 12px; bottom: 12px; max-width: none; }
+}

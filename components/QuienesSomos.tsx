@@ -2,6 +2,15 @@ import Link from "next/link";
 import { Eyebrow, Reveal, Pill } from "./Atoms";
 import { FounderCarousel } from "./FounderCarousel";
 
+const TRUST = [
+  "Estrategia 360°",
+  "Diseño con dirección",
+  "SEO integrado",
+  "Obsesión por el detalle",
+  "Propiedad total del proyecto",
+  "Respuesta en 24h",
+];
+
 export function QuienesSomos() {
   return (
     <section id="nosotros" className="section qs" data-screen-label="03 Quiénes somos">
@@ -18,11 +27,12 @@ export function QuienesSomos() {
                 <span className="b">Marcas con dirección<span style={{ color: "var(--upz-tomato)" }}>.</span></span>
               </h2>
               <p style={{ fontFamily: "var(--font-text)", fontSize: 17, lineHeight: 1.6, color: "var(--fg-2)", margin: 0 }}>
-                UPZITES es un estudio de estrategia digital, branding y UX/UI para
-                marcas que quieren verse más fuertes, claras y competitivas.
-                Combinamos estrategia, diseño bold y cultura visual tropical
-                underground. Desde <strong>Santiago de Chile</strong>, con raíces
-                caraqueñas.
+                UPZITES es un <strong>estudio de diseño fundado en Santiago de Chile</strong>,
+                especializado en estrategia digital, branding y UX/UI. Ayudamos a marcas,
+                emprendedores y empresas a verse más fuertes, claras y competitivas:
+                unimos estrategia, diseño bold y una cultura visual tropical underground
+                para construir identidades y webs con carácter. Con raíces caraqueñas y la
+                mira en Latinoamérica, Estados Unidos y Europa.
               </p>
               <div className="intro-tags" style={{ marginTop: 20 }}>
                 <Pill dot>Estrategia</Pill>
@@ -38,6 +48,14 @@ export function QuienesSomos() {
             </div>
           </Reveal>
         </div>
+
+        <Reveal delay={80}>
+          <div className="qs-trust glass" aria-label="Lo que nos diferencia">
+            {TRUST.map((t) => (
+              <span className="qs-trust-item" key={t}><span className="qs-trust-dot">●</span>{t}</span>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Preloader } from "@/components/Preloader";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { FloatingActions } from "@/components/FloatingActions";
+import { CookieConsent } from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   title: "UPZITES — Diseño estratégico con carácter",
@@ -16,7 +19,10 @@ export default function RootLayout({
     <html lang="es" className="scroll-smooth">
       <body>
         <Preloader />
+        <ScrollProgress />
         {children}
+        <FloatingActions />
+        <CookieConsent />
       </body>
     </html>
   );

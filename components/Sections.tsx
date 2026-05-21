@@ -33,7 +33,7 @@ export function TopNav() {
           <Link href="/#auditoria">Auditoría</Link>
           <Link href="/nosotros">Nosotros</Link>
           <Link href="/#agenda">Agenda</Link>
-          <Link href="/proyectos">Proyectos</Link>
+          <Link href="/#projects">Proyectos</Link>
           <Link href="/#process">Proceso</Link>
           <Link href="/#contact">Contacto</Link>
         </nav>
@@ -372,7 +372,11 @@ export function BigCTA() {
   function update(k: string, v: string) { setState((s) => ({ ...s, [k]: v })); }
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: wire to contacto@upzites.com via real backend (Antigravity)
+    const subject = encodeURIComponent(`Brief UPZITES — ${state.brand || state.name || "Nuevo proyecto"}`);
+    const body = encodeURIComponent(
+      `Nombre: ${state.name}\nEmail: ${state.email}\nMarca / proyecto: ${state.brand}\nQué necesita: ${state.scope}\n\n${state.brief}`
+    );
+    window.location.href = `mailto:contacto@upzites.com?subject=${subject}&body=${body}`;
     setSent(true);
   }
 
@@ -513,7 +517,7 @@ export function Footer() {
             <a href="#">Behance ↗</a>
             <a href="#">LinkedIn ↗</a>
             <a href="#">Are.na ↗</a>
-            <a href="mailto:hola@upzites.com">hola@upzites.com</a>
+            <a href="mailto:contacto@upzites.com">contacto@upzites.com</a>
           </div>
 
           <div className="footer-col">
