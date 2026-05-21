@@ -1,6 +1,5 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
 import {
   BRANDING_PROJECTS,
@@ -21,8 +20,6 @@ const FILTERS = [
   { key: "Marca", label: "Marcas" },
   { key: "web", label: "Webs" },
 ];
-
-const WEB_COLORS = ["var(--upz-electric)", "var(--upz-tomato)", "var(--upz-guava)", "var(--upz-lime)"];
 
 function clean(url: string) {
   return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
@@ -77,18 +74,12 @@ export function ProjectsGallery() {
           ))}
 
         {showWebs &&
-          WEB_PROJECTS.map((p, i) => (
-            <button
-              key={p.slug}
-              type="button"
-              className="pg-card pg-card--web"
-              onClick={() => setSel({ kind: "web", p })}
-              style={{ "--pg-web": WEB_COLORS[i % WEB_COLORS.length] } as CSSProperties}
-            >
-              <span className="pg-web-cover">
-                <span className="pg-web-tag">Sitio web{p.status ? ` · ${p.status}` : ""}</span>
-                <span className="pg-web-name">{p.name}</span>
-                <span className="pg-web-domain">{clean(p.url)}</span>
+          WEB_PROJECTS.map((p) => (
+            <button key={p.slug} type="button" className="pg-card" onClick={() => setSel({ kind: "web", p })}>
+              <img src={p.cover} alt={p.name} loading="lazy" />
+              <span className="pg-card-cap">
+                <span className="pg-card-name">{p.name}</span>
+                <span className="pg-card-cat">Sitio web{p.status ? ` · ${p.status}` : ""}</span>
               </span>
               <span className="pg-card-hover"><span>Ver sitio</span> <span className="arr">↗</span></span>
             </button>
@@ -131,6 +122,7 @@ export function ProjectsGallery() {
               </div>
             ) : (
               <div className="pg-webview">
+                <span className="pg-card-cat">{sel.p.category}{sel.p.status ? ` · ${sel.p.status}` : ""}</span>
                 <h3 className="pg-case-name">{sel.p.name}</h3>
                 <div className="proj-browser">
                   <div className="proj-browser-bar">
@@ -138,11 +130,9 @@ export function ProjectsGallery() {
                     <span className="proj-url">{clean(sel.p.url)}</span>
                     <a className="proj-open" href={sel.p.url} target="_blank" rel="noopener noreferrer">Abrir sitio ↗</a>
                   </div>
-                  <div className="proj-browser-body">
-                    <iframe src={sel.p.url} title={`Vista previa de ${sel.p.name}`} loading="lazy" />
-                  </div>
+                  <img className="pg-shot-img" src={sel.p.shot} alt={`Captura de ${sel.p.name}`} loading="lazy" />
                 </div>
-                <p className="proj-browser-note">Vista previa en vivo del sitio. Si no carga, ábrelo con “Abrir sitio”.</p>
+                <p className="proj-browser-note">Captura del sitio. Ábrelo en vivo con “Abrir sitio”.</p>
               </div>
             )}
           </div>

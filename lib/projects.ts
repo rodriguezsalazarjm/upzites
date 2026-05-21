@@ -16,6 +16,8 @@ export type WebProject = {
   url: string;
   category: string;
   status?: string;
+  cover: string;
+  shot: string;
 };
 
 export const BRANDING_CATEGORIES: { key: BrandingCategory; label: string }[] = [
@@ -59,7 +61,11 @@ export const BRANDING_PROJECTS: BrandingProject[] = [
     description: "Marca industrial sólida para soluciones en mallas y cerramientos, con una imagen robusta y directa.",
     fuertes: ["Imagen robusta", "Sistema técnico", "Aplicaciones comerciales"],
     beneficios: ["Confianza para clientes B2B", "Presencia clara y profesional"],
-    images: gallery("ironmallas", 5),
+    images: [
+      "/images/proyectos/ironmallas/03.jpg",
+      "/images/proyectos/ironmallas/04.jpg",
+      "/images/proyectos/ironmallas/05.jpg",
+    ],
   },
   {
     slug: "profileempresarial", name: "Profile Empresarial", category: "Empresarial",
@@ -143,8 +149,8 @@ export const BRANDING_PROJECTS: BrandingProject[] = [
 ];
 
 export const WEB_PROJECTS: WebProject[] = [
-  { slug: "profileempresarial", name: "Profile Empresarial", url: "https://www.profileempresarial.com", category: "Web corporativa" },
-  { slug: "grafiks", name: "Grafiks", url: "https://www.grafiks.cl", category: "Estudio creativo" },
-  { slug: "ironmallas", name: "Iron Mallas", url: "https://www.ironmallas.cl", category: "Web industrial" },
-  { slug: "kyrontecnology", name: "Kyron Technology", url: "https://www.kyrontecnology.com", category: "Web tecnología", status: "En construcción" },
+  { slug: "profileempresarial", name: "Profile Empresarial", url: "https://www.profileempresarial.com", category: "Web corporativa", cover: "/images/websites/profileempresarial-cover.jpg", shot: "/images/websites/profileempresarial-full.jpg" },
+  { slug: "grafiks", name: "Grafiks", url: "https://www.grafiks.cl", category: "Estudio creativo", cover: "/images/websites/grafiks-cover.jpg", shot: "/images/websites/grafiks-full.jpg" },
+  { slug: "ironmallas", name: "Iron Mallas", url: "https://www.ironmallas.cl", category: "Web industrial", cover: "/images/websites/ironmallas-cover.jpg", shot: "/images/websites/ironmallas-full.jpg" },
+  { slug: "kyrontecnology", name: "Kyron Technology", url: "https://www.kyrontecnology.com", category: "Web tecnología", status: "En construcción", cover: "/images/websites/kyrontecnology-cover.jpg", shot: "/images/websites/kyrontecnology-full.jpg" },
 ];

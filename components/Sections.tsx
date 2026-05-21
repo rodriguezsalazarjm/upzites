@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Brand, Eyebrow, Reveal, Pill, Stamp, Sticker, Barcode } from "./Atoms";
 import { SERVICES } from "@/lib/services";
@@ -11,6 +11,17 @@ import { SocialLinks, UPZITES_SOCIALS } from "./SocialIcons";
 
 // ---------- Top nav -------------------------------------------------
 export function TopNav() {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    return () => { document.body.style.overflow = prev; document.removeEventListener("keydown", onKey); };
+  }, [open]);
+  const close = () => setOpen(false);
+
   return (
     <header className="nav-bar" data-screen-label="Top nav">
       <div className="shell nav-inner">
@@ -41,9 +52,42 @@ export function TopNav() {
         <div className="nav-spacer"></div>
         <span className="nav-meta">SANTIAGO · CHILE</span>
         <SocialLinks links={UPZITES_SOCIALS} className="nav-socials" />
-        <Link href="/#contact" className="btn btn-primary btn-sm">
+        <Link href="/#contact" className="btn btn-primary btn-sm nav-cta">
           Hablemos <span className="arr">↗</span>
         </Link>
+        <button
+          type="button"
+          className={`nav-burger${open ? " is-open" : ""}`}
+          aria-label="Menú"
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <div className={`nav-mobile${open ? " is-open" : ""}`}>
+        <div className="nav-mobile-inner">
+          <span className="nav-mobile-label">Servicios</span>
+          <div className="nav-mobile-services">
+            {SERVICES.map((s) => (
+              <Link key={s.slug} href={`/servicios/${s.slug}`} onClick={close}>{s.title}</Link>
+            ))}
+          </div>
+          <div className="nav-mobile-links">
+            <Link href="/servicios" onClick={close}>Servicios</Link>
+            <Link href="/#auditoria" onClick={close}>Auditoría</Link>
+            <Link href="/nosotros" onClick={close}>Nosotros</Link>
+            <Link href="/#agenda" onClick={close}>Agenda</Link>
+            <Link href="/#projects" onClick={close}>Proyectos</Link>
+            <Link href="/#process" onClick={close}>Proceso</Link>
+            <Link href="/#contact" onClick={close}>Contacto</Link>
+          </div>
+          <SocialLinks links={UPZITES_SOCIALS} className="nav-mobile-socials" />
+          <Link href="/#contact" className="btn btn-primary btn-lg" onClick={close}>
+            Hablemos <span className="arr">↗</span>
+          </Link>
+        </div>
       </div>
     </header>
   );
