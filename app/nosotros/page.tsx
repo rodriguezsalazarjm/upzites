@@ -3,7 +3,6 @@ import Link from "next/link";
 import { TopNav, Footer } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker, Pill } from "@/components/Atoms";
 import { FeatureCards, type FeatureCard } from "@/components/FeatureCards";
-import { GalleryMarquee } from "@/components/GalleryMarquee";
 
 export const metadata = {
   title: "Quiénes somos — UPZITES",
@@ -51,11 +50,9 @@ const PROCESO = [
   { num: "04", t: "Organizamos", d: "Entregamos sistemas claros para que tu marca pueda aplicarse con coherencia y crecer sin perder fuerza." },
 ];
 
-const PHOTOS = [
-  "/images/nosotros/santiago.jpg",
+const FOUNDER_PHOTOS = [
   "/images/founder-1.jpg",
   "/images/founder-2.jpg",
-  "/images/nosotros/caracas.jpg",
   "/images/founder-3.jpg",
   "/images/founder-4.jpg",
 ];
@@ -233,38 +230,80 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* 8. Dónde estamos + fotos */}
-      <section className="brand-closing" data-screen-label="Nosotros · Dónde estamos">
-        <div className="shell" style={{ alignItems: "flex-start", textAlign: "left", gap: 20 }}>
-          <Eyebrow>Dónde estamos</Eyebrow>
-          <Reveal>
-            <h2 className="brand-closing-h" style={{ maxWidth: 900 }}>
-              Desde <span className="mark">Santiago de Chile</span>, con raíces caraqueñas.
-            </h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="brand-closing-copy" style={{ maxWidth: 720, margin: "0 0 6px" }}>
-              Operamos desde Santiago de Chile y llevamos en el ADN la expresividad
-              de Caracas. Diseñamos para marcas de Latinoamérica, Estados Unidos y
-              Europa que quieren competir con una imagen más fuerte.
-            </p>
-          </Reveal>
-          <div className="nos-locations">
-            <span><b>●</b> Santiago de Chile · base</span>
-            <span><b>●</b> Caracas · raíces</span>
-            <span><b>●</b> LATAM · EE.UU. · Europa · alcance</span>
+      {/* 8. Quién es UPZITES (Santiago) */}
+      <section className="section section--ivory" data-screen-label="Nosotros · UPZITES">
+        <div className="shell">
+          <Eyebrow num="07">Quién es UPZITES</Eyebrow>
+          <div className="brand-promise">
+            <Reveal>
+              <figure className="brand-promise-media" style={{ margin: 0 }}>
+                <img src="/images/nosotros/santiago.jpg" alt="Santiago de Chile — base de UPZITES" />
+              </figure>
+            </Reveal>
+            <Reveal delay={120}>
+              <div>
+                <h2 className="brand-promise-h">Un estudio con base en Santiago de Chile.</h2>
+                <p className="brand-body">
+                  Operamos desde Santiago de Chile y llevamos en el ADN la
+                  expresividad de nuestras raíces caraqueñas. Diseñamos para marcas
+                  de Latinoamérica, Estados Unidos y Europa que quieren competir con
+                  una imagen más fuerte.
+                </p>
+                <div className="intro-tags" style={{ marginTop: 20 }}>
+                  <Pill dot>Santiago de Chile · base</Pill>
+                  <Pill dot>Raíces caraqueñas</Pill>
+                  <Pill dot>LATAM · EE.UU. · Europa</Pill>
+                </div>
+                <p className="nos-credit-light">Foto de Santiago: Wikimedia Commons (CC BY-SA).</p>
+              </div>
+            </Reveal>
           </div>
         </div>
-        <div className="shell" style={{ marginTop: 28 }}>
-          <GalleryMarquee images={PHOTOS} name="UPZITES — equipo y ciudades" />
-          <p className="nos-credit">Fotos de Santiago y Caracas: Wikimedia Commons (CC BY-SA).</p>
+      </section>
+
+      {/* 9. El founder */}
+      <section className="section" data-screen-label="Nosotros · Founder">
+        <div className="shell">
+          <Eyebrow num="08">El founder</Eyebrow>
+          <div className="nos-founder">
+            <Reveal>
+              <div className="nos-founder-photos">
+                {FOUNDER_PHOTOS.map((src, i) => (
+                  <img key={i} src={src} alt={`José Manuel Rodríguez — foto ${i + 1}`} loading="lazy" />
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={120}>
+              <div className="nos-founder-bio">
+                <h2 className="brand-promise-h">José Manuel Rodríguez</h2>
+                <p className="qs-bio-role">
+                  Founder &amp; CEO de UPZITES · Desarrollador Full Stack &amp; Diseñador Web
+                </p>
+                <p className="brand-body">
+                  Ayudo a marcas, emprendedores y empresas a transformar su presencia
+                  digital a través de sitios web modernos, funcionales y orientados a
+                  resultados.
+                </p>
+                <p className="brand-body" style={{ marginTop: 12 }}>
+                  Como fundador de UPZITES, combino desarrollo web, diseño estratégico
+                  y visión de negocio para crear experiencias que comunican,
+                  convierten y escalan.
+                </p>
+                <div className="intro-tags" style={{ marginTop: 20 }}>
+                  <Pill dot>Full Stack</Pill>
+                  <Pill dot>Diseño UX/UI</Pill>
+                  <Pill dot>Visión de negocio</Pill>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
       {/* 9. Para quién */}
       <section className="section" data-screen-label="Nosotros · Para quién">
         <div className="shell">
-          <Eyebrow num="07">Para quién trabajamos</Eyebrow>
+          <Eyebrow num="09">Para quién trabajamos</Eyebrow>
           <div className="services-head">
             <Reveal>
               <h2 className="services-h">
@@ -292,7 +331,7 @@ export default function NosotrosPage() {
       {/* 10. Cómo trabajamos */}
       <section id="proceso" className="section section--ivory" data-screen-label="Nosotros · Cómo trabajamos">
         <div className="shell">
-          <Eyebrow num="08">Cómo trabajamos</Eyebrow>
+          <Eyebrow num="10">Cómo trabajamos</Eyebrow>
           <Reveal>
             <h2 className="services-h" style={{ marginBottom: 36 }}>
               Dirección, diseño<br />

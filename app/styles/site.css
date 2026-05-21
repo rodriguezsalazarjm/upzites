@@ -2351,3 +2351,17 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
   .nos-step { border-right: none; border-bottom: 1px solid var(--upz-line); padding: 22px 0; }
 }
 @media (max-width: 540px) { .nos-steps { grid-template-columns: 1fr; } }
+
+/* Founder block (photos integrated) */
+.nos-founder { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 48px; align-items: center; }
+.nos-founder-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.nos-founder-photos img {
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block;
+  border: 1.5px solid var(--upz-carbon); background: var(--bg-2);
+}
+.nos-founder-bio .qs-bio-role { color: var(--upz-electric); margin: 4px 0 16px; }
+.nos-credit-light { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin: 16px 0 0; }
+@media (max-width: 860px) {
+  .nos-founder { grid-template-columns: 1fr; gap: 28px; }
+  .nos-founder-photos { max-width: 420px; }
+}
