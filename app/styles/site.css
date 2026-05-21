@@ -2298,3 +2298,56 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
   .gm-item img { height: 190px; }
   .lightbox-nav { width: 42px; height: 42px; font-size: 22px; }
 }
+
+/* ===================================================================
+   Quiénes somos · /nosotros page
+   =================================================================== */
+.gm { width: 100%; }
+.qs-founder-credit { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--fg-3); margin: 18px 0 0; }
+
+.nos-hero-title {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(34px, 5vw, 78px); line-height: 0.98; letter-spacing: -0.02em;
+  text-transform: uppercase; margin: 14px 0 0; max-width: 1000px;
+}
+.nos-hero-sub { font-family: var(--font-text); font-size: clamp(17px, 2vw, 22px); line-height: 1.5; color: var(--fg-2); max-width: 720px; margin: 22px 0 0; }
+
+.nos-declara { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+.nos-declara p { font-family: var(--font-text); font-size: 17px; line-height: 1.6; color: rgba(250, 251, 245, 0.8); margin: 0; }
+.nos-declara-strong { color: var(--upz-off-white) !important; font-weight: 800; font-size: 19px !important; }
+
+.nos-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1.5px solid var(--upz-carbon); margin-top: 24px; }
+.nos-col { padding: 28px 28px 28px 0; border-right: 1px solid var(--upz-line); }
+.nos-col:last-child { border-right: none; padding-right: 0; }
+.nos-col-num { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--svc-accent, var(--upz-electric)); }
+.nos-col h3 { font-family: var(--font-text); font-weight: 800; font-size: 22px; margin: 12px 0 8px; }
+.nos-col p { font-family: var(--font-text); font-size: 15px; line-height: 1.55; color: var(--fg-3); margin: 0; }
+
+.nos-no { display: flex; flex-direction: column; gap: 8px; }
+.nos-no p { font-family: var(--font-text); font-size: 16px; line-height: 1.5; color: var(--fg-2); margin: 0; }
+.nos-no-strong { color: var(--fg-1) !important; font-weight: 800; font-size: 18px !important; margin-top: 8px !important; }
+.nos-frases { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.nos-frase { font-family: var(--font-text); font-weight: 800; font-size: clamp(14px, 1.6vw, 18px); text-transform: uppercase; letter-spacing: -0.01em; padding: 10px 16px; border: 1.5px solid var(--upz-carbon); background: var(--upz-paper); }
+
+.nos-locations { display: flex; flex-wrap: wrap; gap: 18px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250, 251, 245, 0.8); }
+.nos-locations b { color: var(--upz-lime); }
+.nos-credit { font-family: var(--font-mono); font-size: 11px; color: rgba(250, 251, 245, 0.5); margin: 14px 0 0; }
+
+.nos-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1.5px solid var(--upz-carbon); }
+.nos-step { padding: 28px 24px 28px 0; border-right: 1px solid var(--upz-line); }
+.nos-step:last-child { border-right: none; }
+.nos-step-num { font-family: var(--font-display); font-weight: 900; font-size: 40px; line-height: 0.9; color: var(--svc-accent, var(--upz-electric)); }
+.nos-step h3 { font-family: var(--font-text); font-weight: 800; font-size: 19px; margin: 10px 0 6px; }
+.nos-step p { font-family: var(--font-text); font-size: 14px; line-height: 1.5; color: var(--fg-3); margin: 0; }
+
+.nos-manifiesto { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+.nos-manifiesto p { font-family: var(--font-text); font-size: 17px; line-height: 1.6; color: rgba(250, 251, 245, 0.8); margin: 0; }
+.nos-manifiesto-strong { color: var(--upz-off-white) !important; font-weight: 800; font-size: 19px !important; }
+
+@media (max-width: 860px) {
+  .nos-cols { grid-template-columns: 1fr; }
+  .nos-col { border-right: none; border-bottom: 1px solid var(--upz-line); padding: 24px 0; }
+  .nos-steps { grid-template-columns: 1fr 1fr; }
+  .nos-step { border-right: none; border-bottom: 1px solid var(--upz-line); padding: 22px 0; }
+}
+@media (max-width: 540px) { .nos-steps { grid-template-columns: 1fr; } }

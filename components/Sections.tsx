@@ -31,7 +31,7 @@ export function TopNav() {
             </div>
           </div>
           <Link href="/#auditoria">Auditoría</Link>
-          <Link href="/#nosotros">Nosotros</Link>
+          <Link href="/nosotros">Nosotros</Link>
           <Link href="/#agenda">Agenda</Link>
           <Link href="/proyectos">Proyectos</Link>
           <Link href="/#process">Proceso</Link>
