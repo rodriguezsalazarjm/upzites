@@ -962,13 +962,11 @@ body {
 .tech-logo {
   display: inline-flex; align-items: center; justify-content: center;
   flex: 0 0 auto;
-  height: 30px;
   opacity: .9;
   transition: transform var(--dur-fast) var(--ease-snap), opacity var(--dur-fast);
 }
 .tech-logo img {
-  height: 100%; width: auto; max-width: none; display: block;
-  object-fit: contain;
+  height: 30px; width: auto; max-width: none; display: block;
   /* logos are already white PNGs */
 }
 .tech-marquee-sep { flex: 0 0 auto; }
@@ -981,7 +979,7 @@ body {
   .tech-marquee { overflow-x: auto; }
 }
 @media (max-width: 700px) {
-  .tech-logo { height: 24px; }
+  .tech-logo img { height: 24px; }
   .tech-marquee-track { gap: 26px; }
 }
 
@@ -1603,9 +1601,7 @@ body {
   .agenda-step { grid-template-columns: auto 1fr; gap: 16px; padding: 24px 0; }
   .agenda-step-num { font-size: 56px; }
   .bigcta-form { grid-template-columns: 1fr; }
-  .tech-marquee-track { gap: 26px; }
-  .tech-logo { width: 30px; height: 30px; }
-  .tech-marquee-sep { font-size: 20px; }
+  .tech-logo img { height: 24px; }
   .faq-q { font-size: 18px; }
 }
 
