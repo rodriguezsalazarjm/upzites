@@ -243,11 +243,9 @@ export default function NosotrosPage() {
         <div className="shell">
           <Eyebrow num="07">Quién es UPZITES</Eyebrow>
           <div className="brand-promise">
-            <Reveal variant="clip">
-              <figure className="brand-promise-media" style={{ margin: 0 }}>
-                <img src="/images/nosotros/santiago.jpg" alt="Santiago de Chile — base de UPZITES" />
-              </figure>
-            </Reveal>
+            <figure className="brand-promise-media brand-promise-media--in" style={{ margin: 0 }}>
+              <img src="/images/nosotros/santiago.jpg" alt="Santiago de Chile — base de UPZITES" />
+            </figure>
             <Reveal delay={120}>
               <div>
                 <h2 className="brand-promise-h">Un estudio con base en Santiago de Chile.</h2>
@@ -292,13 +290,11 @@ export default function NosotrosPage() {
 
           {/* José */}
           <div className="nos-founder team-member">
-            <Reveal variant="clip">
-              <div className="nos-founder-photos">
-                {JOSE_PHOTOS.map((src, i) => (
-                  <img key={i} src={src} alt={`José Rodríguez — foto ${i + 1}`} loading="lazy" />
-                ))}
-              </div>
-            </Reveal>
+            <div className="nos-founder-photos nos-founder-photos--in">
+              {JOSE_PHOTOS.map((src, i) => (
+                <img key={i} src={src} alt={`José Rodríguez — foto ${i + 1}`} loading="lazy" />
+              ))}
+            </div>
             <Reveal delay={120}>
               <div className="nos-founder-bio">
                 <h3 className="team-name">José Rodríguez</h3>
@@ -328,13 +324,11 @@ export default function NosotrosPage() {
 
           {/* Jilly */}
           <div className="nos-founder team-member team-member--rev">
-            <Reveal variant="clip">
-              <div className="nos-founder-photos">
-                {JILLY_PHOTOS.map((src, i) => (
-                  <img key={i} src={src} alt={`Jilly Moreno — foto ${i + 1}`} loading="lazy" />
-                ))}
-              </div>
-            </Reveal>
+            <div className="nos-founder-photos nos-founder-photos--in">
+              {JILLY_PHOTOS.map((src, i) => (
+                <img key={i} src={src} alt={`Jilly Moreno — foto ${i + 1}`} loading="lazy" />
+              ))}
+            </div>
             <Reveal delay={120}>
               <div className="nos-founder-bio">
                 <h3 className="team-name">Jilly Moreno</h3>
