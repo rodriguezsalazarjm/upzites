@@ -57,3 +57,6 @@ public/images/websites/*.png
 public/images/**/*.jpg
 public/images/**/*.jpeg
 public/images/**/*.png
+
+# Source project images (optimized output lives in public/images/proyectos/<slug>/)
+public/images/proyectos/Branding/

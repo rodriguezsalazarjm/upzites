@@ -17,7 +17,7 @@ const FILTERS = [
   { key: "all", label: "Todos" },
   { key: "Empresarial", label: "Empresariales" },
   { key: "Foodie", label: "Foodie" },
-  { key: "Marca", label: "Marcas" },
+  { key: "Ropa", label: "Ropa" },
   { key: "web", label: "Webs" },
 ];
 
@@ -28,15 +28,6 @@ function clean(url: string) {
 export function ProjectsGallery() {
   const [filter, setFilter] = useState("all");
   const [sel, setSel] = useState<Selected>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 700px)");
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
 
   useEffect(() => {
     if (!sel) return;
@@ -50,36 +41,27 @@ export function ProjectsGallery() {
     };
   }, [sel]);
 
-  // On mobile we keep it simple: no filters, just the 3 best branding cases
-  // + 3 websites, all in equal-size cards.
-  const effFilter = isMobile ? "all" : filter;
-  const showBranding = effFilter === "all" || ["Empresarial", "Foodie", "Marca"].includes(effFilter);
-  let brandingItems = BRANDING_PROJECTS.filter((p) => effFilter === "all" || p.category === effFilter);
-  const showWebs = effFilter === "all" || effFilter === "web";
-  let webItems = WEB_PROJECTS;
-  if (isMobile) {
-    brandingItems = brandingItems.slice(0, 3);
-    webItems = webItems.slice(0, 3);
-  }
+  const showBranding = filter === "all" || ["Empresarial", "Foodie", "Ropa"].includes(filter);
+  const brandingItems = BRANDING_PROJECTS.filter((p) => filter === "all" || p.category === filter);
+  const showWebs = filter === "all" || filter === "web";
+  const webItems = WEB_PROJECTS;
 
   return (
     <>
-      {!isMobile && (
-        <div className="pg-filters">
-          {FILTERS.map((f) => (
-            <button
-              key={f.key}
-              type="button"
-              className={`pg-filter${filter === f.key ? " is-active" : ""}`}
-              onClick={() => setFilter(f.key)}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-      )}
+      <div className="pg-filters">
+        {FILTERS.map((f) => (
+          <button
+            key={f.key}
+            type="button"
+            className={`pg-filter${filter === f.key ? " is-active" : ""}`}
+            onClick={() => setFilter(f.key)}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
 
-      <div className={`pg-grid${isMobile ? " pg-grid--compact" : ""}`}>
+      <div className="pg-grid pg-grid--behance">
         {showBranding &&
           brandingItems.map((p) => (
             <button key={p.slug} type="button" className="pg-card" onClick={() => setSel({ kind: "branding", p })}>

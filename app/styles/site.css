@@ -2690,15 +2690,17 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
 .pg-filter:hover { transform: translateY(-2px); }
 .pg-filter.is-active { background: var(--upz-carbon); color: var(--upz-off-white); }
 
-.pg-grid { columns: 3 300px; column-gap: 16px; }
+/* Behance-style horizontal grid */
+.pg-grid--behance { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .pg-card {
-  position: relative; display: block; width: 100%; margin: 0 0 16px;
-  break-inside: avoid; padding: 0; border: 1.5px solid var(--upz-carbon);
+  position: relative; display: block; width: 100%; margin: 0;
+  padding: 0; border: 1.5px solid var(--upz-carbon);
   background: var(--bg-3); cursor: pointer; overflow: hidden; line-height: 0;
+  aspect-ratio: 4 / 3;
   transition: transform var(--dur-base) var(--ease-snap), box-shadow var(--dur-base);
 }
 .pg-card:hover { transform: translateY(-4px); box-shadow: var(--sh-2); }
-.pg-card > img { width: 100%; height: auto; display: block; transition: transform 0.6s var(--ease-snap); }
+.pg-card > img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s var(--ease-snap); }
 .pg-card:hover > img { transform: scale(1.06); }
 .pg-card-cap {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
@@ -2743,18 +2745,12 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
 .pg-webview .pg-case-name { margin: 6px 0 18px; }
 .pg-shot-img { width: 100%; height: auto; display: block; }
 
+@media (max-width: 980px) {
+  .pg-grid--behance { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 700px) {
-  .pg-grid { columns: 1; }
+  .pg-grid--behance { grid-template-columns: 1fr; gap: 12px; }
   .pg-case-meta { grid-template-columns: 1fr; gap: 18px; }
-
-  /* Simplified, equal-size grid on mobile */
-  .pg-grid--compact { columns: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .pg-grid--compact .pg-card { margin: 0; aspect-ratio: 1 / 1; }
-  .pg-grid--compact .pg-card > img { height: 100%; object-fit: cover; }
-  .pg-grid--compact .pg-card-cap { padding: 24px 12px 11px; }
-  .pg-grid--compact .pg-card-name { font-size: 14px; }
-  .pg-grid--compact .pg-card-cat { font-size: 9px; }
-  .pg-grid--compact .pg-card-hover { font-size: 13px; }
 }
 
 /* ===================================================================

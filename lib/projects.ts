@@ -1,4 +1,4 @@
-export type BrandingCategory = "Empresarial" | "Foodie" | "Marca";
+export type BrandingCategory = "Empresarial" | "Foodie" | "Ropa";
 
 export type BrandingProject = {
   slug: string;
@@ -23,14 +23,11 @@ export type WebProject = {
 export const BRANDING_CATEGORIES: { key: BrandingCategory; label: string }[] = [
   { key: "Empresarial", label: "Empresariales" },
   { key: "Foodie", label: "Foodie" },
-  { key: "Marca", label: "Marcas" },
+  { key: "Ropa", label: "Ropa" },
 ];
 
 function gallery(slug: string, n: number): string[] {
   return Array.from({ length: n }, (_, i) => `/images/proyectos/${slug}/${String(i + 1).padStart(2, "0")}.webp`);
-}
-function detail(slug: string): string[] {
-  return [`/images/proyectos/${slug}.webp`, ...Array.from({ length: 4 }, (_, i) => `/images/proyectos/${slug}-d${i + 1}.webp`)];
 }
 
 export const BRANDING_PROJECTS: BrandingProject[] = [
@@ -61,11 +58,7 @@ export const BRANDING_PROJECTS: BrandingProject[] = [
     description: "Marca industrial sólida para soluciones en mallas y cerramientos, con una imagen robusta y directa.",
     fuertes: ["Imagen robusta", "Sistema técnico", "Aplicaciones comerciales"],
     beneficios: ["Confianza para clientes B2B", "Presencia clara y profesional"],
-    images: [
-      "/images/proyectos/ironmallas/03.webp",
-      "/images/proyectos/ironmallas/04.webp",
-      "/images/proyectos/ironmallas/05.webp",
-    ],
+    images: gallery("ironmallas", 5),
   },
   {
     slug: "profileempresarial", name: "Profile Empresarial", category: "Empresarial",
@@ -79,7 +72,7 @@ export const BRANDING_PROJECTS: BrandingProject[] = [
     description: "Identidad profesional que representa libertad y movimiento para una marca del sector automotriz.",
     fuertes: ["Imagen dinámica", "Sistema automotriz", "Aplicaciones reales"],
     beneficios: ["Presencia profesional", "Reconocimiento en su sector"],
-    images: detail("vr-automotriz"),
+    images: gallery("vr-automotriz", 5),
   },
   // ---- Foodie ----
   {
@@ -108,43 +101,50 @@ export const BRANDING_PROJECTS: BrandingProject[] = [
     description: "Identidad gastronómica con sabor callejero y color tropical.",
     fuertes: ["Identidad vibrante", "Aplicaciones de menú", "Tono cercano"],
     beneficios: ["Conexión rápida con el público", "Imagen apetitosa y consistente"],
-    images: detail("callebrava"),
+    images: gallery("callebrava", 6),
   },
   {
     slug: "crema", name: "Crema", category: "Foodie",
     description: "Branding cálido y artesanal para una marca con foco en el producto.",
     fuertes: ["Paleta cálida", "Detalle artesanal", "Sistema editorial"],
     beneficios: ["Percepción premium", "Marca que transmite cercanía"],
-    images: detail("crema"),
+    images: gallery("crema", 5),
   },
   {
     slug: "koriramen", name: "Kori Ramen", category: "Foodie",
     description: "Identidad de fusión japonesa moderna para una marca de ramen.",
     fuertes: ["Estética nipona", "Tipografía fuerte", "Sistema carta + redes"],
     beneficios: ["Diferenciación en su categoría", "Imagen apetitosa y ordenada"],
-    images: detail("koriramen"),
+    images: gallery("koriramen", 5),
   },
   {
     slug: "lidonastro", name: "Lido Nastro", category: "Foodie",
     description: "Sistema de marca con carácter editorial y elegancia contenida.",
     fuertes: ["Dirección editorial", "Tipografía protagonista", "Paleta sobria"],
     beneficios: ["Imagen sofisticada", "Coherencia en cada pieza"],
-    images: detail("lidonastro"),
+    images: gallery("lidonastro", 5),
   },
   {
     slug: "norisoi", name: "Norisoi", category: "Foodie",
     description: "Identidad limpia y moderna para una marca de sushi.",
     fuertes: ["Diseño limpio", "Sistema minimal", "Aplicaciones de carta"],
     beneficios: ["Lectura clara del menú", "Percepción fresca y profesional"],
-    images: detail("norisoi"),
+    images: gallery("norisoi", 5),
   },
-  // ---- Marcas ----
+  // ---- Ropa ----
   {
-    slug: "urbanwild", name: "Urban Wild", category: "Marca",
+    slug: "urbanwild", name: "UrbanWild", category: "Ropa",
     description: "Marca urbana con espíritu salvaje y energía tropical underground, pensada para producto y comunidad.",
     fuertes: ["Identidad streetwear", "Sistema gráfico fuerte", "Aplicaciones de producto"],
     beneficios: ["Marca con actitud y comunidad", "Diferenciación cultural"],
     images: gallery("urbanwild", 5),
+  },
+  {
+    slug: "vantarue", name: "Vantarue", category: "Ropa",
+    description: "Identidad de moda con aire premium y minimal, construida para una marca de ropa que busca distinción.",
+    fuertes: ["Estética premium", "Sistema editorial de moda", "Aplicaciones de producto y etiqueta"],
+    beneficios: ["Percepción elevada y aspiracional", "Marca coherente en prenda y digital"],
+    images: gallery("vantarue", 5),
   },
 ];
 
