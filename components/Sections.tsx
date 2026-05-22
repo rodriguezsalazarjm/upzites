@@ -8,6 +8,7 @@ import { HeroBackground } from "./HeroBackground";
 import { CountUp } from "./CountUp";
 import { ProjectsGallery } from "./ProjectsGallery";
 import { SocialLinks, UPZITES_SOCIALS } from "./SocialIcons";
+import { BriefForms } from "./BriefForms";
 
 // ---------- Top nav -------------------------------------------------
 export function TopNav() {
@@ -242,18 +243,14 @@ export function Showcase() {
         </div>
 
         <div className="showcase-grid">
-          <Reveal variant="clip">
-            <figure className="showcase-fig">
-              <img src="/images/home-1.jpg" alt="Identidad UPZITES aplicada en la calle" loading="lazy" />
-              <figcaption><span className="b">●</span> Marca en la calle</figcaption>
-            </figure>
-          </Reveal>
-          <Reveal variant="clip" delay={120}>
-            <figure className="showcase-fig">
-              <img src="/images/home-2.jpg" alt="Sistema de marca UPZITES en web y piezas" loading="lazy" />
-              <figcaption><span className="b">●</span> Sistema en pantalla</figcaption>
-            </figure>
-          </Reveal>
+          <figure className="showcase-fig">
+            <img src="/images/home-1.jpg" alt="Identidad UPZITES aplicada en la calle" loading="lazy" />
+            <figcaption><span className="b">●</span> Marca en la calle</figcaption>
+          </figure>
+          <figure className="showcase-fig">
+            <img src="/images/home-2.jpg" alt="Sistema de marca UPZITES en web y piezas" loading="lazy" />
+            <figcaption><span className="b">●</span> Sistema en pantalla</figcaption>
+          </figure>
         </div>
 
         <p className="showcase-stack-note">
@@ -564,6 +561,8 @@ export function BigCTA() {
             )}
           </Reveal>
         </div>
+
+        <BriefForms />
       </div>
     </section>
   );

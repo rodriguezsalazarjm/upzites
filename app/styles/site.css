@@ -933,10 +933,10 @@ body {
    TECH MARQUEE — monochrome SVG logos in a continuous track
    ===================================================================== */
 .tech-marquee {
-  background: var(--upz-off-white);
+  background: var(--upz-carbon);
   border-top: 1.5px solid var(--upz-carbon);
   border-bottom: 1.5px solid var(--upz-carbon);
-  padding: 22px 0;
+  padding: 26px 0;
   overflow: hidden;
   white-space: nowrap;
   position: relative;
@@ -946,43 +946,40 @@ body {
   content: ""; position: absolute; top: 0; bottom: 0; width: 120px;
   z-index: 2; pointer-events: none;
 }
-.tech-marquee::before { left: 0;  background: linear-gradient(90deg, var(--upz-off-white), transparent); }
-.tech-marquee::after  { right: 0; background: linear-gradient(-90deg, var(--upz-off-white), transparent); }
+.tech-marquee::before { left: 0;  background: linear-gradient(90deg, var(--upz-carbon), transparent); }
+.tech-marquee::after  { right: 0; background: linear-gradient(-90deg, var(--upz-carbon), transparent); }
 .tech-marquee-track {
   display: inline-flex; align-items: center;
-  gap: 38px;
-  animation: marquee 64s linear infinite;
-  color: var(--upz-carbon);
+  gap: 34px;
+  animation: marquee 70s linear infinite;
 }
 .tech-marquee:hover .tech-marquee-track { animation-play-state: paused; }
 .tech-marquee-sep {
-  font-family: var(--font-display); font-weight: 900;
-  font-size: 26px; color: var(--upz-electric);
-  line-height: 1;
+  font-size: 8px; line-height: 1;
+  color: var(--upz-electric);
 }
 
 .tech-logo {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px;
-  color: var(--upz-carbon);
-  opacity: .92;
-  transition: transform var(--dur-fast) var(--ease-snap), color var(--dur-fast), opacity var(--dur-fast);
+  height: 30px;
+  opacity: .9;
+  transition: transform var(--dur-fast) var(--ease-snap), opacity var(--dur-fast);
 }
-.tech-logo svg { width: 100%; height: 100%; display: block; }
+.tech-logo img {
+  height: 100%; width: auto; display: block;
+  /* logos are already white PNGs */
+}
 .tech-marquee-track > .tech-logo:hover {
-  transform: translateY(-2px) scale(1.1);
-  color: var(--upz-electric);
+  transform: translateY(-2px) scale(1.08);
   opacity: 1;
 }
-.tech-logo-word { width: auto; height: 36px; }
-.tech-logo-word-bg {
-  display: inline-flex; align-items: center; justify-content: center;
-  height: 36px; min-width: 36px; padding: 0 8px;
-  background: var(--upz-carbon); color: var(--upz-off-white);
-  font-family: var(--font-display); font-weight: 900;
-  font-size: 18px; letter-spacing: -0.02em;
-  line-height: 1;
-  border-radius: 2px;
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee-track { animation: none; }
+  .tech-marquee { overflow-x: auto; }
+}
+@media (max-width: 700px) {
+  .tech-logo { height: 24px; }
+  .tech-marquee-track { gap: 26px; }
 }
 
 /* =====================================================================
@@ -2748,6 +2745,15 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
   position: relative; margin: 0; overflow: hidden;
   border: 1.5px solid var(--upz-carbon); background: var(--bg-3);
   aspect-ratio: 4 / 5;
+  animation: showcase-in 0.7s var(--ease-snap) both;
+}
+.showcase-fig:nth-child(2) { animation-delay: 0.12s; }
+@keyframes showcase-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase-fig { animation: none; }
 }
 .showcase-fig img {
   width: 100%; height: 100%; object-fit: cover; display: block;
@@ -2779,58 +2785,49 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
 .showcase + .tech-marquee { margin-top: 0; }
 
 /* ===================================================================
-   Brief forms (marca / marca personal)
+   Brief CTA (two buttons → Google Forms, inside contact section)
    =================================================================== */
-.brief-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 26px; }
-.brief-tab {
-  font-family: var(--font-text); font-weight: 700; font-size: 14px;
-  padding: 12px 22px; border-radius: 999px; border: 1.5px solid var(--upz-carbon);
-  background: transparent; color: var(--fg-1); cursor: pointer;
-  transition: background var(--dur-fast) var(--ease-snap), color var(--dur-fast), transform var(--dur-fast);
+.brief-cta {
+  margin-top: 56px; padding-top: 40px;
+  border-top: 1px solid rgba(250, 251, 245, 0.18);
 }
-.brief-tab:hover { transform: translateY(-2px); }
-.brief-tab.is-active { background: var(--upz-carbon); color: var(--upz-off-white); }
-
-.brief-form-title {
-  font-family: var(--font-text); font-size: 16px; line-height: 1.5;
-  color: var(--fg-2); max-width: 620px; margin: 0 0 26px;
+.brief-cta-kicker {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--upz-lime);
 }
-.brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.brief-field { display: flex; flex-direction: column; gap: 8px; }
-.brief-field-full { grid-column: 1 / -1; }
-.brief-field label {
-  font-family: var(--font-text); font-weight: 700;
-  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3);
+.brief-cta-head h3 {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(24px, 3.4vw, 38px); line-height: 1; letter-spacing: -0.02em;
+  text-transform: uppercase; color: var(--upz-off-white); margin: 10px 0 8px;
 }
-.brief-field input, .brief-field textarea {
-  font-family: var(--font-text); font-size: 15px;
-  background: var(--bg-3); color: var(--upz-carbon);
-  border: 1.5px solid var(--upz-line); border-radius: 8px;
-  padding: 12px 14px; outline: none; resize: vertical;
-  transition: border-color var(--dur-fast);
+.brief-cta-head p {
+  font-family: var(--font-text); font-size: 15px; line-height: 1.5;
+  color: rgba(250, 251, 245, 0.7); max-width: 520px; margin: 0 0 24px;
 }
-.brief-field input::placeholder, .brief-field textarea::placeholder { color: var(--fg-3); }
-.brief-field input:focus, .brief-field textarea:focus { border-color: var(--upz-electric); }
-
-.brief-submit { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-.brief-submit small { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--fg-3); }
-
-.brief-confirm {
-  display: flex; gap: 18px; align-items: flex-start;
-  padding: 28px; border: 1.5px solid var(--upz-carbon); border-radius: 14px; background: var(--bg-3);
+.brief-cta-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.brief-cta-card {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 22px 24px; border-radius: 14px;
+  border: 1.5px solid rgba(250, 251, 245, 0.25);
+  background: rgba(250, 251, 245, 0.04);
+  text-decoration: none;
+  transition: transform var(--dur-fast) var(--ease-snap), border-color var(--dur-fast), background var(--dur-fast);
 }
-.brief-confirm .check {
-  flex: none; width: 44px; height: 44px; border-radius: 999px;
-  background: var(--upz-lime); color: var(--upz-carbon);
-  display: inline-flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-weight: 900; font-size: 22px;
+.brief-cta-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--upz-lime);
+  background: rgba(166, 255, 0, 0.08);
 }
-.brief-confirm strong { font-family: var(--font-text); font-weight: 800; font-size: 18px; color: var(--upz-carbon); display: block; margin-bottom: 6px; }
-.brief-confirm p { font-family: var(--font-text); font-size: 15px; line-height: 1.55; color: var(--fg-2); margin: 0 0 14px; }
-
-@media (max-width: 700px) {
-  .brief-grid { grid-template-columns: 1fr; gap: 16px; }
-  .brief-tab { font-size: 13px; padding: 11px 18px; }
+.brief-cta-card-title {
+  font-family: var(--font-display); font-weight: 900; font-size: 20px;
+  letter-spacing: -0.01em; text-transform: uppercase; color: var(--upz-off-white);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.brief-cta-card-title .arr { color: var(--upz-lime); }
+.brief-cta-card:hover .brief-cta-card-title .arr { transform: translate(3px, -3px); }
+.brief-cta-card-desc { font-family: var(--font-text); font-size: 13px; color: rgba(250, 251, 245, 0.6); }
+@media (max-width: 640px) {
+  .brief-cta-btns { grid-template-columns: 1fr; }
 }
 
 /* ===================================================================
