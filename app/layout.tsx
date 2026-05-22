@@ -5,6 +5,7 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { FloatingActions } from "@/components/FloatingActions";
 import { CookieConsent } from "@/components/CookieConsent";
 import { PromoPopup } from "@/components/PromoPopup";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "UPZITES — Diseño estratégico con carácter",
@@ -25,6 +26,7 @@ export default function RootLayout({
         <FloatingActions />
         <PromoPopup />
         <CookieConsent />
+        <SpeedInsights />
       </body>
     </html>
   );
