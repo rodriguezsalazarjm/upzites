@@ -2254,6 +2254,9 @@ a.service-card { text-decoration: none; color: var(--fg-1); }
 }
 .mkt-point-arr { color: var(--svc-accent, var(--upz-electric)); font-weight: 900; flex: none; }
 .section--carbon .pill { border-color: rgba(250, 251, 245, 0.42); color: var(--upz-off-white); }
+/* mkt-points on dark sections: legible text + hairlines */
+.section--carbon .mkt-points { border-top-color: rgba(250, 251, 245, 0.3); }
+.section--carbon .mkt-point { color: var(--upz-off-white); border-bottom-color: rgba(250, 251, 245, 0.18); }
 @media (max-width: 860px) {
   .mkt-points { grid-template-columns: 1fr; }
   .mkt-point { padding: 18px 0; }
