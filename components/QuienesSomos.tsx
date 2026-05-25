@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { Eyebrow, Reveal } from "./Atoms";
 import { SocialLinks, UPZITES_SOCIALS, JOSE_SOCIALS, JILLY_SOCIALS } from "./SocialIcons";
 
@@ -10,6 +13,55 @@ const TRUST = [
   "Propiedad total del proyecto",
   "Respuesta en 24h",
 ];
+
+const SLIDES: Record<string, string[]> = {
+  "José Rodríguez": ["/images/founder-1.webp", "/images/founder-2.webp", "/images/founder-3.webp", "/images/founder-4.webp"],
+  "Jilly Moreno": ["/images/jilly-1.webp", "/images/jilly-2.webp", "/images/jilly-3.webp", "/images/jilly-4.webp"],
+};
+
+function Slideshow({ images, alt }: { images: string[]; alt: string }) {
+  const [i, setI] = useState(0);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    if (!mounted || images.length < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => setI((p) => (p + 1) % images.length), 4000);
+    return () => clearInterval(t);
+  }, [mounted, images.length]);
+
+  useEffect(() => {
+    if (!mounted || !imgRef.current) return;
+    const img = imgRef.current;
+    import("animejs").then(({ animate, cubicBezier }) => {
+      animate(img, {
+        opacity: [0, 1],
+        scale: [1.08, 1],
+        duration: 600,
+        ease: cubicBezier(0.2, 0.8, 0.2, 1),
+      });
+    });
+  }, [i, mounted]);
+
+  if (!mounted || images.length < 2) {
+    return <img src={images[0]} alt={alt} loading="lazy" />;
+  }
+
+  return (
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <img
+        key={i}
+        ref={imgRef}
+        src={images[i]}
+        alt={alt}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0 }}
+      />
+    </div>
+  );
+}
 
 const BLOCKS = [
   {
@@ -24,7 +76,8 @@ const BLOCKS = [
     kicker: "Founder",
     name: "José Rodríguez",
     role: "Diseño & Desarrollo Web",
-    img: "/images/founder-1.webp",
+    img: "",
+    images: SLIDES["José Rodríguez"],
     text: "Diseñador y desarrollador de UPZITES. Une diseño gráfico, desarrollo web y pensamiento técnico —con base en ingeniería civil— para crear marcas, interfaces y sitios con estructura, rendimiento y carácter.",
     socials: JOSE_SOCIALS,
   },
@@ -32,7 +85,8 @@ const BLOCKS = [
     kicker: "Equipo",
     name: "Jilly Moreno",
     role: "Administración & Social Media",
-    img: "/images/jilly-4.webp",
+    img: "",
+    images: SLIDES["Jilly Moreno"],
     text: "Licenciada en Administración con +7 años en gestión, RR.HH. y operaciones. Mantiene el ritmo de UPZITES: organiza procesos, cuida los detalles y conecta la marca con los trends de Instagram y TikTok.",
     socials: JILLY_SOCIALS,
   },
@@ -63,7 +117,11 @@ export function QuienesSomos() {
             <Reveal key={b.name} delay={i * 80} variant="scale">
               <article className="qs-card">
                 <div className="qs-card-img">
-                  <img src={b.img} alt={b.name} loading="lazy" />
+                  {b.images ? (
+                    <Slideshow images={b.images} alt={b.name} />
+                  ) : (
+                    <img src={b.img} alt={b.name} loading="lazy" />
+                  )}
                 </div>
                 <div className="qs-card-body">
                   <span className="qs-card-kicker">{b.kicker}</span>

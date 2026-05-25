@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Brand, Eyebrow, Reveal, Pill, Stamp, Sticker, Barcode } from "./Atoms";
 import { SERVICES } from "@/lib/services";
@@ -103,8 +103,58 @@ export function TopNav() {
 
 // ---------- HERO ----------------------------------------------------
 export function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const reveal = () => {
+      el.querySelectorAll<HTMLElement>(".hero-stamp, .hero-title-line, .hero-sub, .hero-actions a, .hero-tags .pill")
+        .forEach((x) => x.style.opacity = "1");
+    };
+
+    const fallback = setTimeout(reveal, 3000);
+
+    import("animejs").then(({ animate, createTimeline, stagger, cubicBezier }) => {
+      clearTimeout(fallback);
+      const tl = createTimeline({ playbackEase: cubicBezier(0.2, 0.8, 0.2, 1) });
+
+      tl.add(el.querySelector(".hero-stamp")!, {
+        scale: [0, 1],
+        rotate: [-180, 0],
+        duration: 600,
+        ease: "outBack(overshoot = 1.4)",
+      }, 0)
+      .add(el.querySelectorAll(".hero-title-line"), {
+        translateY: [80, 0],
+        opacity: [0, 1],
+        duration: 600,
+        delay: stagger(80),
+      }, 200)
+      .add(el.querySelector(".hero-sub")!, {
+        translateY: [20, 0],
+        opacity: [0, 1],
+        duration: 400,
+      }, 600)
+      .add(el.querySelectorAll(".hero-actions a"), {
+        translateY: [20, 0],
+        opacity: [0, 1],
+        duration: 400,
+        delay: stagger(80),
+      }, 700)
+      .add(el.querySelectorAll(".hero-tags .pill"), {
+        translateY: [16, 0],
+        opacity: [0, 1],
+        duration: 350,
+        delay: stagger(60, { from: "last" }),
+      }, 800);
+    });
+  }, []);
+
   return (
-    <section className="hero grain" id="top" data-screen-label="01 Hero">
+    <section className="hero grain" id="top" data-screen-label="01 Hero" ref={heroRef}>
       <HeroBackground />
       <div className="shell" style={{ position: "relative" }}>
         <div className="hero-runner">
@@ -115,9 +165,9 @@ export function Hero() {
         <Stamp text="UPZITES · TROPICAL UNDERGROUND · STUDIO · " bg="var(--upz-electric)" color="var(--upz-off-white)" />
 
         <h1 className="hero-title">
-          Acelera<br />
-          el <span className="hl">crecimiento</span><br />
-          de tu <span className="red">marca</span><span className="dot">.</span>
+          <span className="hero-title-line">Acelera</span><br />
+          <span className="hero-title-line">el <span className="hl">crecimiento</span></span><br />
+          <span className="hero-title-line">de tu <span className="red">marca</span><span className="dot">.</span></span>
         </h1>
 
         <div className="hero-foot">
@@ -169,7 +219,44 @@ export function Marquee({ items, variant }: { items?: string[], variant?: "carbo
 
 // ---------- 03 SERVICES --------------------------------------------
 export function Services() {
+  const gridRef = useRef<HTMLDivElement>(null);
   const total = `0${SERVICES.length}`;
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const cards = grid.querySelectorAll<HTMLElement>(".service-card");
+    if (cards.length === 0) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            io.disconnect();
+            const fallback = setTimeout(() => {
+              cards.forEach((c) => c.style.opacity = "1");
+            }, 3000);
+            import("animejs").then(({ animate, stagger, cubicBezier }) => {
+              clearTimeout(fallback);
+              animate(cards as unknown as HTMLElement[], {
+                opacity: [0, 1],
+                translateY: [30, 0],
+                duration: 500,
+                delay: stagger(60, { from: "center" }),
+                ease: cubicBezier(0.2, 0.8, 0.2, 1),
+              });
+            });
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    io.observe(grid);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section id="services" className="section" data-screen-label="03 Services">
       <div className="shell">
@@ -190,33 +277,32 @@ export function Services() {
           </Reveal>
         </div>
 
-        <div className="services-grid">
+        <div className="services-grid" ref={gridRef}>
           {SERVICES.map((s, i) => (
-            <Reveal key={s.slug} delay={i * 60}>
-              <Link
-                href={`/servicios/${s.slug}`}
-                className="service-card"
-                style={{ "--svc-accent": s.accent } as React.CSSProperties}
-              >
-                <div className="service-media">
-                  <img src={s.image} alt={s.title} loading="lazy" />
-                  {s.badge && <span className="service-badge">{s.badge}</span>}
-                </div>
-                <div className="service-num">
-                  <span>{s.num} / {total}</span>
-                  <span>Servicio</span>
-                </div>
-                <h3 className="service-card-title">{s.title}</h3>
-                <p className="service-card-body">{s.card}</p>
-                <div className="service-card-tags">
-                  {s.tags.map((t) => <span key={t}>{t}</span>)}
-                </div>
-                <div className="service-card-foot">
-                  <span className="service-card-foot-label">Más detalles</span>
-                  <span className="service-card-arr">↗</span>
-                </div>
-              </Link>
-            </Reveal>
+            <Link
+              key={s.slug}
+              href={`/servicios/${s.slug}`}
+              className="service-card"
+              style={{ "--svc-accent": s.accent } as React.CSSProperties}
+            >
+              <div className="service-media">
+                <img src={s.image} alt={s.title} loading="lazy" />
+                {s.badge && <span className="service-badge">{s.badge}</span>}
+              </div>
+              <div className="service-num">
+                <span>{s.num} / {total}</span>
+                <span>Servicio</span>
+              </div>
+              <h3 className="service-card-title">{s.title}</h3>
+              <p className="service-card-body">{s.card}</p>
+              <div className="service-card-tags">
+                {s.tags.map((t) => <span key={t}>{t}</span>)}
+              </div>
+              <div className="service-card-foot">
+                <span className="service-card-foot-label">Más detalles</span>
+                <span className="service-card-arr">↗</span>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -226,8 +312,45 @@ export function Services() {
 
 // ---------- Showcase band (brand in the wild) ----------------------
 export function Showcase() {
+  const showcaseRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = showcaseRef.current;
+    if (!section) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const figs = section.querySelectorAll<HTMLElement>(".showcase-fig");
+    if (figs.length === 0) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            io.disconnect();
+            const fallback = setTimeout(() => {
+              figs.forEach((f) => f.style.opacity = "1");
+            }, 3000);
+            import("animejs").then(({ animate, stagger, cubicBezier }) => {
+              clearTimeout(fallback);
+              animate(figs as unknown as HTMLElement[], {
+                clipPath: ["inset(50% 0% 50% 0%)", "inset(0% 0% 0% 0%)"],
+                opacity: [0, 1],
+                duration: 800,
+                delay: stagger(200),
+                ease: cubicBezier(0.2, 0.8, 0.2, 1),
+              });
+            });
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    io.observe(section);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <section className="section section--ivory showcase" data-screen-label="Showcase">
+    <section className="section section--ivory showcase" data-screen-label="Showcase" ref={showcaseRef}>
       <div className="shell">
         <Eyebrow>UPZITES en el mundo real</Eyebrow>
         <div className="services-head">
@@ -317,6 +440,43 @@ const STEPS = [
 ];
 
 export function Process() {
+  const processRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const grid = processRef.current;
+    if (!grid) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const rows = grid.querySelectorAll<HTMLElement>(".process-row");
+    if (rows.length === 0) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            io.disconnect();
+            const fallback = setTimeout(() => {
+              rows.forEach((r) => r.style.opacity = "1");
+            }, 3000);
+            import("animejs").then(({ animate, stagger, cubicBezier }) => {
+              clearTimeout(fallback);
+              animate(rows as unknown as HTMLElement[], {
+                opacity: [0, 1],
+                translateY: [24, 0],
+                duration: 500,
+                delay: stagger(100),
+                ease: cubicBezier(0.2, 0.8, 0.2, 1),
+              });
+            });
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    io.observe(grid);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section id="process" className="section section--carbon" data-screen-label="05 Process">
       <div className="shell">
@@ -337,19 +497,17 @@ export function Process() {
           </Reveal>
         </div>
 
-        <div className="process-grid">
+        <div className="process-grid" ref={processRef}>
           {STEPS.map((s, i) => (
-            <Reveal key={s.num} delay={i * 80}>
-              <div className="process-row">
-                <span className="process-row-num">{s.num}</span>
-                <h3 className="process-row-title">{s.title}</h3>
-                <p className="process-row-body">{s.body}</p>
-                <div className="process-row-deliverables">
-                  {s.deliverables.map((d) => <span key={d}>{d}</span>)}
-                </div>
-                <span className="process-row-arr">↗</span>
+            <div key={s.num} className="process-row">
+              <span className="process-row-num">{s.num}</span>
+              <h3 className="process-row-title">{s.title}</h3>
+              <p className="process-row-body">{s.body}</p>
+              <div className="process-row-deliverables">
+                {s.deliverables.map((d) => <span key={d}>{d}</span>)}
               </div>
-            </Reveal>
+              <span className="process-row-arr">↗</span>
+            </div>
           ))}
         </div>
       </div>

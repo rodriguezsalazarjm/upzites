@@ -7,14 +7,22 @@ const WA_MSG = encodeURIComponent("Hola UPZITES 👋, quiero información sobre 
 
 export function FloatingActions() {
   const [tip, setTip] = useState(false);
+  const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
-    // Show a friendly nudge a few seconds after load.
     const show = setTimeout(() => setTip(true), 6000);
-    // Auto-hide it after a while so it's not nagging.
     const hide = setTimeout(() => setTip(false), 18000);
     return () => { clearTimeout(show); clearTimeout(hide); };
   }, []);
+
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 600);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <div className="fab" aria-label="Contacto rápido">
@@ -32,6 +40,17 @@ export function FloatingActions() {
           <span>Estoy aquí para ayudarte. Escríbenos por WhatsApp 👋</span>
         </div>
       )}
+      <button
+        type="button"
+        className={`fab-btn fab-top${showTop ? " is-visible" : ""}`}
+        onClick={scrollTop}
+        aria-label="Volver arriba"
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M12 19V5M5 12l7-7 7 7" />
+        </svg>
+        <span className="fab-label">Volver arriba</span>
+      </button>
       <a
         className="fab-btn fab-mail"
         href="mailto:contacto@upzites.com"

@@ -29,15 +29,17 @@ export function CountUp({
         entries.forEach((e) => {
           if (e.isIntersecting && !done.current) {
             done.current = true;
-            const start = performance.now();
-            const tick = (now: number) => {
-              const t = Math.min(1, (now - start) / duration);
-              const eased = 1 - Math.pow(1 - t, 3);
-              setVal(Math.round(eased * to));
-              if (t < 1) requestAnimationFrame(tick);
-            };
-            requestAnimationFrame(tick);
             io.disconnect();
+
+            import("animejs").then(({ animate }) => {
+              const obj = { n: 0 };
+              animate(obj, {
+                n: [0, to],
+                duration,
+                ease: "outBack(overshoot = 1.4)",
+                onUpdate: () => setVal(Math.round(obj.n)),
+              });
+            });
           }
         });
       },
