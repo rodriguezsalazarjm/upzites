@@ -67,8 +67,9 @@ export function Logo3D() {
         <Safe3D>
           <SVG3D
             svg={LOGO_SVG}
+            color="#111111"
             smoothness={0.6}
-            material="emissive"
+            material="default"
             metalness={0}
             roughness={0.5}
             animate="swing"
