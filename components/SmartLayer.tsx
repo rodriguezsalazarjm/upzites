@@ -1,4 +1,5 @@
 import { Eyebrow, Reveal } from "./Atoms";
+import { Logo3D } from "./Logo3D";
 
 const CARDS = [
   {
@@ -51,6 +52,8 @@ export function SmartLayer() {
             </p>
           </Reveal>
         </div>
+
+        <Logo3D />
 
         <div className="smart-grid">
           {CARDS.map((c, i) => (
