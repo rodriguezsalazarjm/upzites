@@ -8,11 +8,11 @@ import type { NextConfig } from "next";
 // - ws:/wss: in connect-src keep dev HMR working.
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://connect.facebook.net",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https:",
+  "img-src 'self' data: blob: https: https://www.facebook.com https://*.facebook.com",
   "font-src 'self' data:",
-  "connect-src 'self' https: ws: wss:",
+  "connect-src 'self' https: https://www.facebook.com https://*.facebook.com ws: wss:",
   "frame-src 'self' https://cal.com https://app.cal.com",
   "frame-ancestors 'self'",
   "base-uri 'self'",

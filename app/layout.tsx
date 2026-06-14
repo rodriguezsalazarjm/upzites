@@ -3,6 +3,7 @@ import { Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { Preloader } from "@/components/Preloader";
 import { DeferredUI } from "@/components/DeferredUI";
+import { MetaPixel } from "@/components/MetaPixel";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const bebas = Bebas_Neue({
@@ -28,6 +29,7 @@ export default function RootLayout({
         <Preloader />
         {children}
         <DeferredUI />
+        <MetaPixel />
         <SpeedInsights />
       </body>
     </html>
