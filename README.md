@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is the UPZITES website built with Next.js App Router.
 
-## Getting Started
-
-First, run the development server:
+## Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Meta Pixel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Meta Pixel is installed through:
 
-## Learn More
+- `components/MetaPixel.tsx`: base pixel script and noscript fallback.
+- `components/MetaPixelPageView.tsx`: App Router pageview tracking for client-side route changes.
+- `lib/meta-pixel.ts`: reusable tracking helpers and ecommerce event validation.
+- `app/layout.tsx`: global integration.
 
-To learn more about Next.js, take a look at the following resources:
+Configure the pixel in Vercel:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_META_PIXEL_ID=1009533758712390
+NEXT_PUBLIC_META_PIXEL_IDS=
+NEXT_PUBLIC_META_PIXEL_REQUIRE_CONSENT=false
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Use `NEXT_PUBLIC_META_PIXEL_IDS` only when multiple pixels are needed. It accepts a comma-separated list. If an event must go to a single pixel, use `trackSingle` or `trackSingleCustom` from `lib/meta-pixel.ts`.
 
-## Deploy on Vercel
+### Available Helpers
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `pageview()`
+- `event(name, params?)`
+- `customEvent(name, params?)`
+- `trackSingle(pixelId, eventName, params?)`
+- `trackSingleCustom(pixelId, eventName, params?)`
+- `viewContent(params)`
+- `addToCart(params)`
+- `initiateCheckout(params)`
+- `purchase(orderId, params)`
+- `search(params)`
+- `lead(params)`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ecommerce events must use `content_type: "product"`, numeric `value`, ISO currency codes such as `CLP`, and product IDs/SKUs that match Commerce Manager.
+
+Example:
+
+```ts
+import { addToCart } from "@/lib/meta-pixel";
+
+addToCart({
+  contents: [{ id: "SKU-1", quantity: 1 }],
+  content_type: "product",
+  value: 50000,
+  currency: "CLP",
+});
+```
+
+`purchase(orderId, params)` stores the order ID in `sessionStorage` so a refresh of the confirmation page does not duplicate the Purchase event.
+
+### Verification
+
+1. Deploy to Vercel.
+2. Open `https://www.upzites.com/` without an ad blocker.
+3. Check Meta Events Manager > Test events for `PageView`.
+4. Use the Meta Pixel Helper Chrome extension to confirm the pixel ID and event payloads.
+
+For iOS 14.5+ Aggregated Event Measurement, verify the domain in Meta Business Manager and prioritize up to 8 conversion events. Suggested ecommerce priority:
+
+1. Purchase
+2. InitiateCheckout
+3. AddToCart
+4. ViewContent
+5. Lead
+6. Search
