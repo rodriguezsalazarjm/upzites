@@ -42,6 +42,9 @@ Use `NEXT_PUBLIC_META_PIXEL_IDS` only when multiple pixels are needed. It accept
 - `purchase(orderId, params)`
 - `search(params)`
 - `lead(params)`
+- `trackContact(params)`
+- `trackSchedule(params)`
+- `trackCompleteRegistration(params)`
 
 Ecommerce events must use `content_type: "product"`, numeric `value`, ISO currency codes such as `CLP`, and product IDs/SKUs that match Commerce Manager.
 
@@ -59,6 +62,17 @@ addToCart({
 ```
 
 `purchase(orderId, params)` stores the order ID in `sessionStorage` so a refresh of the confirmation page does not duplicate the Purchase event.
+
+### Configured Events
+
+- `PageView`: base pixel script on initial load and `MetaPixelPageView` on App Router route changes.
+- `ViewContent`: home, services index, service landing pages, projects and about pages through `ViewContentOnLoad`.
+- `Lead`: main contact brief form, Google brief links and successful site-audit runs.
+- `Contact`: floating WhatsApp/email buttons and promo WhatsApp buttons.
+- `Schedule`: Cal.com agenda opener.
+- `CompleteRegistration`: newsletter signup.
+
+The site currently has no real cart, checkout, payment step, account registration, product wishlist, paid subscription, trial, application, location finder, product customizer or donation flow. The helpers for `AddToCart`, `InitiateCheckout`, `AddPaymentInfo`, `Purchase`, `AddToWishlist`, `Subscribe`, `StartTrial`, `SubmitApplication`, `FindLocation`, `CustomizeProduct` and `Donate` are prepared but should only be wired once those actions exist.
 
 ### Verification
 

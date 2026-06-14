@@ -1,4 +1,5 @@
 import { Reveal } from "./Atoms";
+import { trackLead } from "@/lib/meta-pixel";
 
 // TODO: el segundo enlace que enviaste era idéntico al primero.
 // Cuando tengas la URL del otro brief, reemplaza BRIEF_PERSONAL_URL.
@@ -37,6 +38,7 @@ export function BriefForms() {
               href={b.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackLead({ currency: "CLP" })}
             >
               <span className="brief-cta-card-title">{b.title} <span className="arr">↗</span></span>
               <span className="brief-cta-card-desc">{b.desc}</span>

@@ -3,10 +3,12 @@ import { AuditTool, ScheduleMeeting } from "@/components/ExtraSections";
 import { QuienesSomos } from "@/components/QuienesSomos";
 import { TechMarquee } from "@/components/TechMarquee";
 import { SmartLayer } from "@/components/SmartLayer";
+import { ViewContentOnLoad } from "@/components/MetaPixelEvents";
 
 export default function Home() {
   return (
     <div id="top">
+      <ViewContentOnLoad contentName="Home" contentCategory="landing" contentId="page:home" />
       <TopNav />
 
       {/* Above-the-fold */}

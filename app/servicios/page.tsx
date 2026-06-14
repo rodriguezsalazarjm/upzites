@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { TopNav, Footer, Marquee, Testimonials } from "@/components/Sections";
 import { Eyebrow, Reveal, Pill, Sticker } from "@/components/Atoms";
+import { ViewContentOnLoad } from "@/components/MetaPixelEvents";
 import { SERVICES } from "@/lib/services";
 
 export const metadata = {
@@ -28,6 +29,7 @@ export default function ServiciosPage() {
   const total = `0${SERVICES.length}`;
   return (
     <div id="top">
+      <ViewContentOnLoad contentName="Servicios" contentCategory="services" contentId="page:servicios" />
       <TopNav />
 
       {/* Page header */}

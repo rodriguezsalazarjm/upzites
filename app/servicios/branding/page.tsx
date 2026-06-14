@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TopNav, Footer, Marquee } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker } from "@/components/Atoms";
 import { BrandingCards } from "@/components/BrandingCards";
+import { ViewContentOnLoad } from "@/components/MetaPixelEvents";
 import { ServiceNav } from "@/components/ServiceNav";
 
 export const metadata = {
@@ -23,6 +24,7 @@ const PROCESS = [
 export default function BrandingPage() {
   return (
     <div id="top" style={{ "--svc-accent": ACCENT } as CSSProperties}>
+      <ViewContentOnLoad contentName="Branding estratégico" contentCategory="service" contentId="service:branding" />
       <TopNav />
       <ServiceNav current="branding" />
 

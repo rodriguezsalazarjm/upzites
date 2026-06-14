@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TopNav, Footer, Marquee } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker } from "@/components/Atoms";
 import { FeatureCards, type FeatureCard } from "@/components/FeatureCards";
+import { ViewContentOnLoad } from "@/components/MetaPixelEvents";
 import { ServiceNav } from "@/components/ServiceNav";
 
 export const metadata = {
@@ -53,6 +54,7 @@ const PHRASES = [
 export default function EcommercePage() {
   return (
     <div id="top" style={{ "--svc-accent": ACCENT } as CSSProperties}>
+      <ViewContentOnLoad contentName="E-commerce" contentCategory="service" contentId="service:ecommerce" />
       <TopNav />
       <ServiceNav current="ecommerce" />
 

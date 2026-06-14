@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { trackContact } from "@/lib/meta-pixel";
 
 const KEY = "upz-cyberweek-seen";
 const WA_NUMBER = "56973178796";
@@ -69,7 +70,10 @@ export function PromoPopup() {
             href={`https://wa.me/${WA_NUMBER}?text=${WA_MSG}`}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={close}
+            onClick={() => {
+              trackContact({ contact_method: "whatsapp", location: "promo_cyberweek" });
+              close();
+            }}
           >
             Quiero mi descuento <span className="arr">↗</span>
           </a>
@@ -100,7 +104,10 @@ export function PromoPopup() {
               href={`https://wa.me/${WA_NUMBER}?text=${WA_IA_MSG}`}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={close}
+              onClick={() => {
+                trackContact({ contact_method: "whatsapp", location: "promo_ia" });
+                close();
+              }}
             >
               Saber más <span className="arr">↗</span>
             </a>

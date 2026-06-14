@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import { Eyebrow, Reveal, Barcode } from "./Atoms";
 import { runAudit, getCachedAudit } from "@/lib/pagespeed";
+import { trackLead, trackSchedule } from "@/lib/meta-pixel";
 
 // ---------- Mock score generator (deterministic from URL) ----------
 function hashStr(s: string) {
@@ -93,6 +94,7 @@ export function AuditTool() {
 
     const res = await runAudit(u);
     if (res.success) {
+      trackLead({ currency: "CLP" });
       setResult(res.data);
     } else {
       setNotice(res.error);
@@ -339,7 +341,14 @@ export function ScheduleMeeting() {
                   style={{ width: "100%", height: "100%", minHeight: "580px", border: "none" }}
                 />
               ) : (
-                <button type="button" className="agenda-cal-facade" onClick={() => setCalOpen(true)}>
+                <button
+                  type="button"
+                  className="agenda-cal-facade"
+                  onClick={() => {
+                    trackSchedule({ location: "agenda_section" });
+                    setCalOpen(true);
+                  }}
+                >
                   <span className="agenda-cal-facade-tag">Cal.com · Google Meet · 30 min</span>
                   <span className="agenda-cal-facade-title">Reserva tu reunión</span>
                   <span className="agenda-cal-facade-sub">Toca para ver la disponibilidad en vivo y elegir tu horario.</span>

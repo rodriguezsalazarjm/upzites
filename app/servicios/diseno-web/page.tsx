@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TopNav, Footer, Marquee } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker } from "@/components/Atoms";
 import { FeatureCards, type FeatureCard } from "@/components/FeatureCards";
+import { ViewContentOnLoad } from "@/components/MetaPixelEvents";
 import { ServiceNav } from "@/components/ServiceNav";
 
 export const metadata = {
@@ -37,6 +38,7 @@ const PROCESS = [
 export default function DisenoWebPage() {
   return (
     <div id="top" style={{ "--svc-accent": ACCENT } as CSSProperties}>
+      <ViewContentOnLoad contentName="Diseño web" contentCategory="service" contentId="service:diseno-web" />
       <TopNav />
       <ServiceNav current="diseno-web" />
 

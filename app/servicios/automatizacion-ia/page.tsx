@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TopNav, Footer, Marquee } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker, Pill } from "@/components/Atoms";
 import { FeatureCards, type FeatureCard } from "@/components/FeatureCards";
+import { ViewContentOnLoad } from "@/components/MetaPixelEvents";
 import { ServiceNav } from "@/components/ServiceNav";
 
 export const metadata = {
@@ -43,6 +44,7 @@ const PROCESS = [
 export default function AutomatizacionIaPage() {
   return (
     <div id="top" style={{ "--svc-accent": ACCENT } as CSSProperties}>
+      <ViewContentOnLoad contentName="Automatización con IA" contentCategory="service" contentId="service:automatizacion-ia" />
       <TopNav />
       <ServiceNav current="automatizacion-ia" />
 

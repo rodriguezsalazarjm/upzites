@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import { TopNav, Footer } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker, Pill } from "@/components/Atoms";
+import { ViewContentOnLoad } from "@/components/MetaPixelEvents";
 import { FeatureCards, type FeatureCard } from "@/components/FeatureCards";
 import { SocialLinks, JOSE_SOCIALS, JILLY_SOCIALS } from "@/components/SocialIcons";
 
@@ -67,6 +68,7 @@ const JILLY_PHOTOS = [
 export default function NosotrosPage() {
   return (
     <div id="top" style={{ "--svc-accent": ACCENT } as CSSProperties}>
+      <ViewContentOnLoad contentName="Nosotros" contentCategory="about" contentId="page:nosotros" />
       <TopNav />
 
       {/* 1. Hero */}

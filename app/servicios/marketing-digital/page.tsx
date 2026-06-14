@@ -3,6 +3,7 @@ import Link from "next/link";
 import { TopNav, Footer, Marquee } from "@/components/Sections";
 import { Eyebrow, Reveal, Sticker, Pill } from "@/components/Atoms";
 import { FeatureCards, type FeatureCard } from "@/components/FeatureCards";
+import { ViewContentOnLoad } from "@/components/MetaPixelEvents";
 import { ServiceNav } from "@/components/ServiceNav";
 
 export const metadata = {
@@ -73,6 +74,7 @@ const FRASES = [
 export default function MarketingDigitalPage() {
   return (
     <div id="top" style={{ "--svc-accent": ACCENT } as CSSProperties}>
+      <ViewContentOnLoad contentName="Marketing digital" contentCategory="service" contentId="service:marketing-digital" />
       <TopNav />
       <ServiceNav current="marketing-digital" />
 

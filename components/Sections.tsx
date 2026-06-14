@@ -9,6 +9,7 @@ import { CountUp } from "./CountUp";
 import { ProjectsGallery } from "./ProjectsGallery";
 import { SocialLinks, UPZITES_SOCIALS } from "./SocialIcons";
 import { BriefForms } from "./BriefForms";
+import { trackCompleteRegistration, trackLead } from "@/lib/meta-pixel";
 
 // ---------- Top nav -------------------------------------------------
 export function TopNav() {
@@ -573,6 +574,7 @@ export function BigCTA() {
     const body = encodeURIComponent(
       `Nombre: ${state.name}\nEmail: ${state.email}\nMarca / proyecto: ${state.brand}\nQué necesita: ${state.scope}\n\n${state.brief}`
     );
+    trackLead({ currency: "CLP" });
     window.location.href = `mailto:contacto@upzites.com?subject=${subject}&body=${body}`;
     setSent(true);
   }
@@ -677,7 +679,13 @@ export function BigCTA() {
 export function Footer() {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
-  function submit(e: React.FormEvent) { e.preventDefault(); if (email) setDone(true); }
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (email) {
+      trackCompleteRegistration({ registration_method: "newsletter" });
+      setDone(true);
+    }
+  }
 
   return (
     <footer className="footer" data-screen-label="08 Footer">

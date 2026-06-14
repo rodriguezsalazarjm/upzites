@@ -178,6 +178,8 @@ export function event(name: string, params?: MetaPixelParams) {
   safeTrack(() => window.fbq?.("track", name, params ?? {}));
 }
 
+export const trackEvent = event;
+
 export function customEvent(name: string, params?: MetaPixelParams) {
   if (!name || name.length > 50) {
     logSkipped("invalid custom event name");
@@ -186,6 +188,8 @@ export function customEvent(name: string, params?: MetaPixelParams) {
 
   safeTrack(() => window.fbq?.("trackCustom", name, params ?? {}));
 }
+
+export const trackCustomEvent = customEvent;
 
 export function trackSingle(pixelId: string, eventName: string, params?: MetaPixelParams) {
   if (!pixelId || !eventName) return;
@@ -201,13 +205,21 @@ export function viewContent(params: EcommerceEventParams) {
   if (validateEcommerceParams(params)) event("ViewContent", params);
 }
 
+export function trackViewContent(params: MetaPixelParams = {}) {
+  event("ViewContent", params);
+}
+
 export function addToCart(params: EcommerceEventParams) {
   if (validateEcommerceParams(params)) event("AddToCart", params);
 }
 
+export const trackAddToCart = addToCart;
+
 export function initiateCheckout(params: EcommerceEventParams) {
   if (validateEcommerceParams(params)) event("InitiateCheckout", params);
 }
+
+export const trackInitiateCheckout = initiateCheckout;
 
 export function purchase(orderId: string, params: EcommerceEventParams) {
   if (!orderId || !validateEcommerceParams(params) || typeof window === "undefined") return;
@@ -222,13 +234,63 @@ export function purchase(orderId: string, params: EcommerceEventParams) {
   }
 }
 
+export const trackPurchase = purchase;
+
 export function search(params: SearchEventParams) {
   if (!params.search_string || !isValidContentIds(params.content_ids)) return;
   if (!isValidValue(params.value) || !isValidCurrency(params.currency)) return;
   event("Search", params);
 }
 
+export const trackSearch = search;
+
 export function lead(params: LeadEventParams = {}) {
   if (!isValidValue(params.value) || !isValidCurrency(params.currency)) return;
   event("Lead", params);
+}
+
+export const trackLead = lead;
+
+export function trackContact(params: MetaPixelParams = {}) {
+  event("Contact", params);
+}
+
+export function trackSchedule(params: MetaPixelParams = {}) {
+  event("Schedule", params);
+}
+
+export function trackCompleteRegistration(params: MetaPixelParams = {}) {
+  event("CompleteRegistration", params);
+}
+
+export function trackAddToWishlist(params: MetaPixelParams = {}) {
+  event("AddToWishlist", params);
+}
+
+export function trackAddPaymentInfo(params: MetaPixelParams = {}) {
+  event("AddPaymentInfo", params);
+}
+
+export function trackSubscribe(params: MetaPixelParams = {}) {
+  event("Subscribe", params);
+}
+
+export function trackStartTrial(params: MetaPixelParams = {}) {
+  event("StartTrial", params);
+}
+
+export function trackSubmitApplication(params: MetaPixelParams = {}) {
+  event("SubmitApplication", params);
+}
+
+export function trackFindLocation(params: MetaPixelParams = {}) {
+  event("FindLocation", params);
+}
+
+export function trackCustomizeProduct(params: MetaPixelParams = {}) {
+  event("CustomizeProduct", params);
+}
+
+export function trackDonate(params: MetaPixelParams = {}) {
+  event("Donate", params);
 }
